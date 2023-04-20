@@ -1,8 +1,11 @@
+import { Container } from '../styles/globals';
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <label>Proc Studio</label>
-    </main>
+    <Container>
+      <label>{'Proc Studio'}</label>
+    </Container>
   );
-}
+};
+
+export default Home;
