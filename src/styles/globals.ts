@@ -1,11 +1,21 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const colors = {
+  primary: '#2A3F54',
+  tertiary: '#1D79FB',
   border: '#9B9B9B',
-  backgroundInput: '#EEEEEE',
-  black: '#000000',
+  icons: '#41414D',
+  text: '#A8A8B3',
+  background: '#EEEEEE',
+  black: '#121214',
   white: '#FFFFFF',
-  red: '#CD0D15',
+  error: '#CD0D15',
+};
+
+export const border = {
+  primary: `1px solid ${colors.primary}`,
+  shadow: `0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)`,
 };
 
 export const Container = styled.div`
@@ -16,7 +26,7 @@ export const Container = styled.div`
 
   width: 100%;
   height: 100%;
-  font-family: "Roboto" , sans-serif;
+  font-family: 'Roboto', sans-serif;
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -25,12 +35,6 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
-  }
-
-  body {
-    color: ${colors.white};
-    -webkit-font-smoothing: antialiased;
-    background-color: ${colors.backgroundInput};
   }
 
   body, input, button {
