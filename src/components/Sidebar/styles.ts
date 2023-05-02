@@ -5,6 +5,8 @@ export const Container = styled.div`
   width: 224px;
   height: 100%;
   position: fixed;
+  overflow: auto;
+
   background-color: ${colors.primary};
 
   .imgContainer {
@@ -12,13 +14,38 @@ export const Container = styled.div`
   }
 
   a {
+    display: flex;
+    position: relative;
     width: 100%;
     height: 56px;
-    font-size: 20px;
     font-weight: 500;
 
     padding: 6px 0;
-    margin-top: 26px;
+    margin-top: 16px !important;
+
+    ::before {
+      content: '';
+      position: absolute;
+      bottom: 6px;
+      left: 0;
+      width: 0%;
+      height: 2.07px;
+      background-color: ${colors.white};
+      transition: width 0.3s ease-in-out;
+    }
+
+    :hover::before {
+      width: 100%;
+    }
+
+    .icon {
+      margin: 0 16px;
+    }
+
+    .arrow {
+      margin-left: auto;
+      margin-right: 16px;
+    }
 
     :hover {
       text-decoration: none;

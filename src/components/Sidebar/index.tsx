@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Stack, Icon, Link } from '@chakra-ui/react';
+import { Box, Flex, Text, Stack } from '@chakra-ui/react';
 import { ActiveLink } from '@/components';
 import { useRouter } from 'next/router';
 
@@ -9,6 +9,9 @@ import {
   MdOutlineFormatListNumbered,
   MdPerson,
   MdAccountBalance,
+  MdOutlineArrowRight,
+  MdOutlineListAlt,
+  MdOutlineDescription,
 } from 'react-icons/md';
 
 import logoImg from '../../assets/logo-white.png';
@@ -20,56 +23,76 @@ import { Container } from './styles';
 const Sidebar = () => {
   const router = useRouter();
 
-  console.log('router', router.pathname);
-
   return (
     <Container>
       <Flex className="imgContainer" mt={35} pb={35} justifyContent={'center'}>
         <Image src={logoImg} alt="Logo" />
       </Flex>
 
-      <Stack spacing="12" align="center">
+      <Stack>
         <Box color={colors.white} w={'100%'}>
           <Stack spacing="8" w={'100%'}>
             <ActiveLink href="/">
-              <Flex flexDir={'column'} alignItems={'center'}>
-                <MdHome size={28} />
-                <Text fontWeight="medium">{'Home'}</Text>
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdHome size={24} className="icon" />
+                <Text fontWeight="medium">{'Página inicial'}</Text>
+                <MdOutlineArrowRight className="arrow" />
               </Flex>
             </ActiveLink>
 
             <ActiveLink href="/clients">
-              <Flex flexDir={'column'} alignItems={'center'}>
-                <MdGroups size={28} />
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdGroups size={24} className="icon" />
                 <Text fontWeight="medium">{'Clientes'}</Text>
+                <MdOutlineArrowRight className="arrow" />
               </Flex>
             </ActiveLink>
 
-            <ActiveLink href="/trabalhos">
-              <Flex flexDir={'column'} alignItems={'center'}>
-                <MdHandyman size={28} />
+            <ActiveLink href="/works">
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdHandyman size={24} className="icon" />
                 <Text fontWeight="medium">{'Trabalhos'}</Text>
+                <MdOutlineArrowRight className="arrow" />
               </Flex>
             </ActiveLink>
 
-            <ActiveLink href="/tarefas">
-              <Flex flexDir={'column'} alignItems={'center'}>
-                <MdOutlineFormatListNumbered />
+            <ActiveLink href="/tasks">
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdOutlineFormatListNumbered size={24} className="icon" />
                 <Text fontWeight="medium">{'Tarefas'}</Text>
+                <MdOutlineArrowRight className="arrow" />
               </Flex>
             </ActiveLink>
 
-            <ActiveLink href="/usuarios">
-              <Flex flexDir={'column'} alignItems={'center'}>
-                <MdPerson size={28} />
+            <ActiveLink href="/users">
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdPerson size={24} className="icon" />
                 <Text fontWeight="medium">{'Usuários'}</Text>
+                <MdOutlineArrowRight className="arrow" />
               </Flex>
             </ActiveLink>
 
-            <ActiveLink href="/escritorio">
-              <Flex flexDir={'column'} alignItems={'center'}>
-                <MdAccountBalance size={28} />
+            <ActiveLink href="/office">
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdAccountBalance size={24} className="icon" />
                 <Text fontWeight="medium">{'Escritório'}</Text>
+                <MdOutlineArrowRight className="arrow" />
+              </Flex>
+            </ActiveLink>
+
+            <ActiveLink href="/reports">
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdOutlineListAlt size={24} className="icon" />
+                <Text fontWeight="medium">{'Relatórios'}</Text>
+                <MdOutlineArrowRight className="arrow" />
+              </Flex>
+            </ActiveLink>
+
+            <ActiveLink href="/documents">
+              <Flex w={'100%'} alignItems={'center'}>
+                <MdOutlineDescription size={24} className="icon" />
+                <Text fontWeight="medium">{'Documentos'}</Text>
+                <MdOutlineArrowRight className="arrow" />
               </Flex>
             </ActiveLink>
           </Stack>

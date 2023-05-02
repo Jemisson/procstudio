@@ -1,4 +1,6 @@
 import Link, { LinkProps } from 'next/link';
+import { Box } from '@chakra-ui/react';
+
 import { useRouter } from 'next/router';
 import { cloneElement } from 'react';
 
@@ -19,10 +21,11 @@ export function ActiveLink({ children, ...rest }: ActiveLinkProps) {
 
   return (
     <Link {...rest}>
-      {cloneElement(children, {
-        backgroundColor: isActive ? `${colors.white}` : `${colors.primary}`,
-        color: isActive ? `${colors.primary}` : `${colors.white}`,
-      })}
+      <Box
+        w={0.01}
+        bg={isActive ? colors.white : 'transparent'}
+      />
+      {cloneElement(children)}
     </Link>
   );
 }

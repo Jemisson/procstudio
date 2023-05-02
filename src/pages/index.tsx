@@ -1,11 +1,10 @@
-import { Container } from '../styles/globals';
-
+import Layout from '../components/Layout';
 
 const Home = () => {
   return (
-    <Container>
+    <Layout>
       <label>{'Proc Studio'}</label>
-    </Container>
+    </Layout>
   );
 };
 
