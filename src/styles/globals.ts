@@ -1,4 +1,16 @@
-import { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
+import { createTheme } from '@mui/material/styles';
+
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#2A3F54',
+    },
+    error: {
+      main: '#CD0D15',
+    },
+  },
+});
 
 export const colors = {
   primary: '#2A3F54',
@@ -18,26 +30,10 @@ export const border = {
   0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)`,
 };
 
-export const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    box-sizing: border-box;
-  }
+export const DescriptionText = styled.text`
+  font-size: 16px;
+  font-weight: 300;
 
-  body, input, button {
-    font-size: 20px;
-    height: 100%;
-    font-family: "Roboto" , sans-serif;
-  }
-
-  h1, h2, h3, h4, h5, h6, strong {
-    font-weight: 500;
-    color: ${colors.black};
-  }
-
-  button {
-    cursor: pointer;
-  }
+  text-transform: none;
+  color: ${colors.white};
 `;
