@@ -12,7 +12,9 @@ export const Container = styled.div`
   }
 
   .main {
-    grid-column: 2 / -1;
     padding: 20px;
+    overflow: auto;
+    min-width: 600px;
+    grid-column: 2 / -1;
   }
 `;

@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Layout } from '@/components';
 import { colors, DescriptionText } from '@/styles/globals';
 import { Container, Title, ContentContainer, Input } from './styles';
-import { MdOutlineMoreHoriz, MdOutlineAddCircle } from 'react-icons/md';
+import {
+  MdOutlineMoreHoriz,
+  MdOutlineAddCircle,
+  MdSearch,
+} from 'react-icons/md';
 
 import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
@@ -25,17 +29,15 @@ const Clients = () => {
 
         <ContentContainer>
           <Box display={'flex'} justifyContent={'space-between'}>
-            <Box className="containerInput">
-              <Input
-                className="searchInput"
-                type="text"
-                autoComplete="off"
-                placeholder="Buscar Cliente"
-                onFocus={() => {
-                  console.log('Focus');
-                }}
-                onChange={e => console.log(e.target.value)}
-              />
+            <Box>
+              <Input>
+                <input
+                  type="text"
+                  placeholder="Buscar Cliente"
+                  onChange={e => console.log('Busca', e.target.value)}
+                />
+                <MdSearch size={25} />
+              </Input>
             </Box>
             <Button
               variant="contained"
@@ -54,10 +56,8 @@ const Clients = () => {
               <MdOutlineAddCircle size={20} />
             </Button>
           </Box>
-          <Box mt={'20px'} className="tableContainer">
+          <Box mt={'20px'} sx={{ height: 400 }}>
             <DataGrid
-              disableColumnMenu
-              checkboxSelection={false}
               disableRowSelectionOnClick={true}
               rows={
                 clientsList &&

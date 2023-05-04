@@ -4,6 +4,7 @@ import { colors } from '@/styles/globals';
 export const Container = styled.div`
   width: 224px;
   height: 100%;
+  z-index: 1;
   position: fixed;
   overflow: auto;
 

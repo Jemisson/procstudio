@@ -14,10 +14,12 @@ export const theme = createTheme({
 
 export const colors = {
   primary: '#2A3F54',
-  tertiary: '#1D79FB',
+  secondary: '#1D79FB',
+  tertiary: '#7F7F7F',
   border: '#9B9B9B',
   icons: '#41414D',
   text: '#A8A8B3',
+  placeholder: '#E0E0E0',
   background: '#EEEEEE',
   black: '#121214',
   white: '#FFFFFF',
