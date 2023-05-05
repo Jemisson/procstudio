@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { colors } from '@/styles/globals';
 
 export const Container = styled.div`
+  margin-top: 64px;
+
   .ml-8 {
     margin-right: 8px;
   }
@@ -15,7 +17,6 @@ export const Title = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  padding: 20px;
   max-width: 1038px;
 
   border-radius: 4px;

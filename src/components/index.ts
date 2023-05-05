@@ -1,4 +1,4 @@
-import { ActiveLink } from './ActiveLink';
-import Layout from './Layout';
+import ActiveLink from './ActiveLink';
+import Sidebar from './Sidebar';
 
-export { ActiveLink, Layout };
+export { ActiveLink, Sidebar };

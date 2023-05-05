@@ -1,10 +1,12 @@
-import Layout from '../components/Layout';
+import { Sidebar } from '@/components';
 
 const Home = () => {
   return (
-    <Layout>
-      <label>{'Proc Studio'}</label>
-    </Layout>
+    <Sidebar>
+      <div>
+        <label>{'Proc Studio'}</label>
+      </div>
+    </Sidebar>
   );
 };
 

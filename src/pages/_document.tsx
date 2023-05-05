@@ -16,7 +16,7 @@ interface MyDocumentProps extends DocumentProps {
   emotionStyleTags: JSX.Element[];
 }
 
-export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
+const MyDocument = ({ emotionStyleTags }: MyDocumentProps) => {
   return (
     <Html lang="en">
       <title>{'Proc Studio'}</title>
@@ -35,7 +35,9 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
       </body>
     </Html>
   );
-}
+};
+
+export default MyDocument;
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   const originalRenderPage = ctx.renderPage;

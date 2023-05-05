@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { Layout } from '@/components';
 import { colors, DescriptionText } from '@/styles/globals';
 import { Container, Title, ContentContainer, Input } from './styles';
 import {
@@ -13,7 +12,8 @@ import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { clientData } from '../../services';
-import { IClientProps } from '@/interfaces/clients';
+import { Sidebar } from '@/components';
+import { IClientProps } from '@/interfaces/IClients';
 
 const Clients = () => {
   const [clientsList, setClientsList] = useState<IClientProps[]>([]);
@@ -23,7 +23,7 @@ const Clients = () => {
   }, []);
 
   return (
-    <Layout>
+    <Sidebar>
       <Container>
         <Title>{'Clientes'}</Title>
 
@@ -152,7 +152,7 @@ const Clients = () => {
           </Box>
         </ContentContainer>
       </Container>
-    </Layout>
+    </Sidebar>
   );
 };
 

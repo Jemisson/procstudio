@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 import { colors } from '@/styles/globals';
 
-export const Container = styled.div`
-  width: 224px;
-  height: 100%;
-  z-index: 1;
-  position: fixed;
-  overflow: auto;
-
-  background-color: ${colors.primary};
+export const Container = styled.span`
+  .MuiDrawer-paperAnchorDockedLeft {
+    background-color: ${colors.primary};
+  }
 
   .imgContainer {
     border-bottom: 1px solid ${colors.border};
