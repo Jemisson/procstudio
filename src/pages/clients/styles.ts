@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { colors } from '@/styles/globals';
 
 export const Container = styled.div`
-  margin-top: 64px;
+  margin-top: 84px;
+  padding: 0 40px;
 
   .ml-8 {
     margin-right: 8px;
@@ -10,18 +11,37 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: bold;
-
+  margin-bottom: 20px;
   color: ${colors.primary};
 `;
 
 export const ContentContainer = styled.div`
-  max-width: 1038px;
-
+  min-height: 100vh;
+  padding: 20px;
+  max-width: 1600px;
   border-radius: 4px;
   margin-bottom: 20px;
   background-color: ${colors.white};
+
+  .MuiDataGrid-virtualScrollerRenderZone,
+  .MuiDataGrid-row,
+  .odd-row {
+    width: 100%;
+  }
+
+  .even-row:nth-child(odd) {
+    background-color: ${colors.placeholder};
+  }
+
+  .odd-row:nth-child(even) {
+    background-color: ${colors.background};
+  }
+
+  .MuiDataGrid-row:hover {
+    transform: scale(1.02);
+  }
 `;
 
 export const Input = styled.div`
@@ -30,6 +50,7 @@ export const Input = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  height: 36px;
   width: 350px;
   padding: 8px;
   border-radius: 4px;

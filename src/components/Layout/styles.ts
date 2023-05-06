@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { colors } from '@/styles/globals';
 
 export const Container = styled.span`
+  min-height: 100vh;
+
   .MuiDrawer-paperAnchorDockedLeft {
     background-color: ${colors.primary};
   }

@@ -25,13 +25,18 @@ const MyDocument = ({ emotionStyleTags }: MyDocumentProps) => {
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
           rel="stylesheet"
-        ></link>
+        />
         <meta name="emotion-insertion-point" content="" />
         {emotionStyleTags}
       </Head>
-      <body>
+      <body
+        style={{
+          backgroundColor: '#EEEEEE',
+        }}
+      >
         <Main />
         <NextScript />
+
       </body>
     </Html>
   );

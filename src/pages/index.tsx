@@ -1,12 +1,12 @@
-import { Sidebar } from '@/components';
+import { Layout } from '@/components';
 
 const Home = () => {
   return (
-    <Sidebar>
+    <Layout>
       <div>
         <label>{'Proc Studio'}</label>
       </div>
-    </Sidebar>
+    </Layout>
   );
 };
 

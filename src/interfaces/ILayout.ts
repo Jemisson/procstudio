@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
-interface ISidebarProps {
+interface ILayoutProps {
   children: ReactNode;
 }
 
@@ -9,4 +9,4 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-export type { ISidebarProps, AppBarProps };
+export type { ILayoutProps, AppBarProps };

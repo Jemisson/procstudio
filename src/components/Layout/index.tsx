@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { ActiveLink } from '@/components';
-import { Box, Flex, Text, Stack } from '@chakra-ui/react';
+import { ActiveLink, Footer } from '@/components';
 import BoxMaterial from '@mui/material/Box';
+import { Box, Flex, Text, Stack } from '@chakra-ui/react';
 
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
-import { AppBarProps, ISidebarProps } from '@/interfaces/ISidebar';
+import { AppBarProps, ILayoutProps } from '@/interfaces/ILayout';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import { Toolbar, CssBaseline, Typography, IconButton } from '@mui/material';
+import { Toolbar, CssBaseline, IconButton } from '@mui/material';
 
 import {
   MdHome,
@@ -22,13 +22,16 @@ import {
   MdOutlineListAlt,
   MdOutlineDescription,
   MdMenu,
+  MdKeyboardArrowDown,
   MdKeyboardArrowLeft,
 } from 'react-icons/md';
 
 import Image from 'next/image';
 import { Container } from './styles';
 import { colors } from '@/styles/globals';
-import logoImg from '../../assets/logo-white.png';
+
+import Logo from '../../assets/logo-white.png';
+import Profile from '../../assets/Profile.png';
 
 const drawerWidth = 224;
 
@@ -103,7 +106,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const Sidebar = ({ children }: ISidebarProps) => {
+const Layout = ({ children }: ILayoutProps) => {
   const theme = useTheme();
   const { asPath } = useRouter();
   const [open, setOpen] = useState(false);
@@ -133,9 +136,25 @@ const Sidebar = ({ children }: ISidebarProps) => {
           >
             <MdMenu />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            {/* {Header Title} */}
-          </Typography>
+          <Box
+            display={'flex'}
+            alignItems={'center'}
+            marginLeft={'auto'}
+            marginRight={'16px'}
+          >
+            <Image src={Profile} alt="Logo" />
+            <Box display={'flex'} alignItems={'center'}>
+              <Text
+                fontSize="md"
+                color={colors.white}
+                marginLeft={2}
+                marginRight={2}
+              >
+                {'John Doe'}
+              </Text>
+              <MdKeyboardArrowDown size={24} className="arrow" />
+            </Box>
+          </Box>
         </Toolbar>
       </AppBar>
       <Container>
@@ -147,12 +166,8 @@ const Sidebar = ({ children }: ISidebarProps) => {
           </DrawerHeader>
           {open && (
             <>
-              <Flex
-                className="imgContainer"
-                pb={35}
-                justifyContent={'center'}
-              >
-                <Image src={logoImg} alt="Logo" />
+              <Flex className="imgContainer" pb={35} justifyContent={'center'}>
+                <Image src={Logo} alt="Logo" />
               </Flex>
             </>
           )}
@@ -259,11 +274,15 @@ const Sidebar = ({ children }: ISidebarProps) => {
         </Drawer>
       </Container>
 
-      <BoxMaterial component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <BoxMaterial
+        component="main"
+        sx={{ flexGrow: 1, width: '100%', overflow: 'hidden' }}
+      >
         {children}
+        <Footer />
       </BoxMaterial>
     </BoxMaterial>
   );
 };
 
-export default Sidebar;
+export default Layout;
