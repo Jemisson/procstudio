@@ -1,5 +1,8 @@
-import styled from 'styled-components';
-import { colors } from '@/styles/globals';
+import { Box } from '@chakra-ui/react';
+import styled, { css, keyframes } from 'styled-components';
+
+import { colors, border } from '@/styles/globals';
+import { IMenuUserProps } from '@/interfaces/ILayout';
 
 export const Container = styled.span`
   min-height: 100vh;
@@ -48,6 +51,69 @@ export const Container = styled.span`
 
     :hover {
       text-decoration: none;
+    }
+  }
+`;
+
+export const CloseDropdown = styled.div`
+  display: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+`;
+
+const menuAnimation = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+export const SelectContainer = styled.div<IMenuUserProps>`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 16px;
+  cursor: pointer;
+
+  ${props =>
+    props.isOpen &&
+    css`
+      svg {
+        rotate: 180deg;
+      }
+
+      .close {
+        display: block;
+      }
+    `}
+
+  .selectItemsContainer {
+    width: 145px;
+    margin-top: 130px;
+    position: absolute;
+
+    z-index: 1;
+    border-radius: 4px;
+    box-shadow: ${border.shadow};
+    background-color: ${colors.primary};
+    animation: ${menuAnimation} 0.3s ease-in-out forwards;
+
+    .selectItem {
+      padding: 2px 8px;
+      cursor: pointer;
+      color: ${colors.white};
+
+      :hover {
+        transform: scaleY(1.02);
+      }
     }
   }
 `;

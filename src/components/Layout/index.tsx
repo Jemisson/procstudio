@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 
-import { ActiveLink, Footer } from '@/components';
+import { ActiveLink } from '@/components';
 import BoxMaterial from '@mui/material/Box';
 import { Box, Flex, Text, Stack } from '@chakra-ui/react';
 
@@ -27,8 +26,8 @@ import {
 } from 'react-icons/md';
 
 import Image from 'next/image';
-import { Container } from './styles';
 import { colors } from '@/styles/globals';
+import { Container, SelectContainer, CloseDropdown } from './styles';
 
 import Logo from '../../assets/logo-white.png';
 import Profile from '../../assets/Profile.png';
@@ -108,21 +107,32 @@ const Drawer = styled(MuiDrawer, {
 
 const Layout = ({ children }: ILayoutProps) => {
   const theme = useTheme();
-  const { asPath } = useRouter();
-  const [open, setOpen] = useState(false);
+  const [openSidebar, setOpenSidebar] = useState(false);
+  const [openUserMenu, setOpenUserMenu] = useState(false);
+
+  const userConfig = [
+    {
+      id: 1,
+      description: 'Detalhes',
+    },
+    {
+      id: 2,
+      description: 'Sair',
+    },
+  ];
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setOpenSidebar(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setOpenSidebar(false);
   };
 
   return (
     <BoxMaterial sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={openSidebar}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -131,40 +141,59 @@ const Layout = ({ children }: ILayoutProps) => {
             edge="start"
             sx={{
               marginRight: 5,
-              ...(open && { display: 'none' }),
+              ...(openSidebar && { display: 'none' }),
             }}
           >
             <MdMenu />
           </IconButton>
-          <Box
-            display={'flex'}
-            alignItems={'center'}
-            marginLeft={'auto'}
-            marginRight={'16px'}
+          <SelectContainer
+            onClick={() => setOpenUserMenu(!openUserMenu)}
+            isOpen={openUserMenu}
           >
+            <CloseDropdown
+              className="close"
+              onClick={() => setOpenUserMenu(false)}
+            />
             <Image src={Profile} alt="Logo" />
             <Box display={'flex'} alignItems={'center'}>
-              <Text
-                fontSize="md"
-                color={colors.white}
-                marginLeft={2}
-                marginRight={2}
-              >
-                {'John Doe'}
-              </Text>
+              <Box>
+                <Text
+                  fontSize="md"
+                  color={colors.white}
+                  marginLeft={2}
+                  marginRight={2}
+                >
+                  {'procstudio'}
+                </Text>
+              </Box>
               <MdKeyboardArrowDown size={24} className="arrow" />
             </Box>
-          </Box>
+            {openUserMenu && (
+              <Box className="selectItemsContainer">
+                {userConfig.map((item, index) => {
+                  return (
+                    <Box
+                      key={index}
+                      className="selectItem"
+                      onClick={() => console.log(item.id)}
+                    >
+                      {item.description}
+                    </Box>
+                  );
+                })}
+              </Box>
+            )}
+          </SelectContainer>
         </Toolbar>
       </AppBar>
       <Container>
-        <Drawer variant="permanent" open={open}>
+        <Drawer variant="permanent" open={openSidebar}>
           <DrawerHeader>
             <IconButton onClick={handleDrawerClose}>
               {theme.direction === 'rtl' ? null : <MdKeyboardArrowLeft />}
             </IconButton>
           </DrawerHeader>
-          {open && (
+          {openSidebar && (
             <>
               <Flex className="imgContainer" pb={35} justifyContent={'center'}>
                 <Image src={Logo} alt="Logo" />
@@ -177,7 +206,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdHome size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Página inicial'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -189,7 +218,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/clients">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdGroups size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Clientes'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -201,7 +230,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/works">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdHandyman size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Trabalhos'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -213,7 +242,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/tasks">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdOutlineFormatListNumbered size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Tarefas'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -225,7 +254,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/users">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdPerson size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Usuários'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -237,7 +266,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/office">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdAccountBalance size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Escritório'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -249,7 +278,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/reports">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdOutlineListAlt size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Relatórios'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -261,7 +290,7 @@ const Layout = ({ children }: ILayoutProps) => {
               <ActiveLink href="/documents">
                 <Flex w={'100%'} alignItems={'center'}>
                   <MdOutlineDescription size={24} className="icon" />
-                  {open && (
+                  {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Documentos'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
@@ -279,7 +308,6 @@ const Layout = ({ children }: ILayoutProps) => {
         sx={{ flexGrow: 1, width: '100%', overflow: 'hidden' }}
       >
         {children}
-        <Footer />
       </BoxMaterial>
     </BoxMaterial>
   );

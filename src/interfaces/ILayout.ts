@@ -9,4 +9,8 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-export type { ILayoutProps, AppBarProps };
+interface IMenuUserProps {
+  isOpen: boolean;
+}
+
+export type { ILayoutProps, AppBarProps, IMenuUserProps };

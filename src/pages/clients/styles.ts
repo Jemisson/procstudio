@@ -31,6 +31,14 @@ export const ContentContainer = styled.div`
     width: 100%;
   }
 
+  .MuiDataGrid-cell:focus {
+    outline: none;
+  }
+
+  .MuiDataGrid-columnHeader:focus {
+    outline: none;
+  }
+
   .even-row:nth-child(odd) {
     background-color: ${colors.placeholder};
   }
@@ -40,7 +48,7 @@ export const ContentContainer = styled.div`
   }
 
   .MuiDataGrid-row:hover {
-    transform: scale(1.02);
+    background-color: ${colors.primaryOpacity};
   }
 `;
 

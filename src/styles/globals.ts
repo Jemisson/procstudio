@@ -14,6 +14,7 @@ export const theme = createTheme({
 
 export const colors = {
   primary: '#2A3F54',
+  primaryOpacity: 'rgba(42, 63, 84, 0.3)',
   secondary: '#1D79FB',
   tertiary: '#7F7F7F',
   border: '#9B9B9B',

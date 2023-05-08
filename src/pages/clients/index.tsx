@@ -12,7 +12,7 @@ import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
 import { clientData } from '../../services';
-import { Layout } from '@/components';
+import { Layout, Footer } from '@/components';
 import { IClientProps } from '@/interfaces/IClients';
 
 const Clients = () => {
@@ -67,7 +67,7 @@ const Clients = () => {
             <Box mt={'20px'} sx={{ height: 450 }}>
               <DataGrid
                 disableColumnMenu
-                disableRowSelectionOnClick={true}
+                disableRowSelectionOnClick
                 rows={
                   clientsList &&
                   clientsList.map((client: IClientProps, index: number) => ({
@@ -162,6 +162,7 @@ const Clients = () => {
             </Box>
           </ContentContainer>
         </Container>
+        <Footer />
       </Layout>
     </>
   );
