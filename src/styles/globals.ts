@@ -17,6 +17,7 @@ export const colors = {
   primaryOpacity: 'rgba(42, 63, 84, 0.3)',
   secondary: '#1D79FB',
   tertiary: '#7F7F7F',
+  green: '#29A744',
   border: '#9B9B9B',
   icons: '#41414D',
   text: '#A8A8B3',

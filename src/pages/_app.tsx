@@ -12,11 +12,11 @@ import createEmotionCache from '../utils/createEmotionCache';
 
 const clientSideEmotionCache = createEmotionCache();
 
-export interface MyAppProps extends AppProps {
+export interface StudioAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
-const MyApp = (props: MyAppProps) => {
+const StudioApp = (props: StudioAppProps) => {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
@@ -34,4 +34,4 @@ const MyApp = (props: MyAppProps) => {
   );
 };
 
-export default MyApp;
+export default StudioApp;
