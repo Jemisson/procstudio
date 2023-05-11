@@ -1,4 +1,7 @@
 import * as React from 'react';
+import { AppType } from 'next/app';
+import { StudioAppProps } from './_app';
+
 import Document, {
   Html,
   Head,
@@ -8,9 +11,7 @@ import Document, {
   DocumentContext,
 } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import { AppType } from 'next/app';
 import createEmotionCache from '@/utils/createEmotionCache';
-import { StudioAppProps } from './_app';
 
 interface MyDocumentProps extends DocumentProps {
   emotionStyleTags: JSX.Element[];

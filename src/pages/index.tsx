@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useForm } from 'react-hook-form';
 import { useContext, useState } from 'react';
+import { AuthContext } from '../contexts/AuthContext';
 
 import Image from 'next/image';
 import Logo from '../assets/logo-colors@3x.png';
@@ -10,10 +11,12 @@ import { Container, Content, Input, Form, Button } from '@/styles/homeStyles';
 
 const Home = () => {
   const { register, handleSubmit } = useForm();
+  const { signIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
   async function handleSignIn(data: any) {
     setLoading(true);
+    await signIn(data);
     setLoading(false);
   }
 

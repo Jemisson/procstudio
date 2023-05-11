@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react';
 
 import { theme } from '@/styles/globals';
 import { ThemeProvider } from '@mui/material/styles';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 import Head from 'next/head';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -27,7 +28,9 @@ const StudioApp = (props: StudioAppProps) => {
       <ChakraProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Component {...pageProps} />
+          <AuthProvider>
+            <Component {...pageProps} />
+          </AuthProvider>
         </ThemeProvider>
       </ChakraProvider>
     </CacheProvider>

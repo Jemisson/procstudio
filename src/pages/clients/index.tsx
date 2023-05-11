@@ -15,6 +15,10 @@ import { clientData } from '../../services';
 import { Layout, Footer } from '@/components';
 import { IClientProps } from '@/interfaces/IClients';
 
+import { parseCookies } from 'nookies';
+import { GetServerSideProps } from 'next';
+import { getAPIClient } from '../../services/axios';
+
 const Clients = () => {
   const [clientsList, setClientsList] = useState<IClientProps[]>([]);
 
@@ -169,3 +173,23 @@ const Clients = () => {
 };
 
 export default Clients;
+
+export const getServerSideProps: GetServerSideProps = async ctx => {
+  // const apiClient = getAPIClient(ctx);
+  const { ['nextauth.token']: token } = parseCookies(ctx);
+
+  if (!token || token === 'undefined') {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  // await apiClient.get('/users');
+
+  return {
+    props: {},
+  };
+};
