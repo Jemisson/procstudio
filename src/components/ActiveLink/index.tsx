@@ -1,5 +1,7 @@
 import Link, { LinkProps } from 'next/link';
+import { Box } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+
 import { cloneElement } from 'react';
 
 import { colors } from '@/styles/globals';
@@ -8,10 +10,9 @@ interface ActiveLinkProps extends LinkProps {
   children: React.ReactElement;
 }
 
-export function ActiveLink({ children, ...rest }: ActiveLinkProps) {
-  const { asPath } = useRouter();
-
+const ActiveLink = ({ children, ...rest }: ActiveLinkProps) => {
   let isActive = false;
+  const { asPath } = useRouter();
 
   if (asPath === rest.href || asPath === rest.as) {
     isActive = true;
@@ -19,10 +20,10 @@ export function ActiveLink({ children, ...rest }: ActiveLinkProps) {
 
   return (
     <Link {...rest}>
-      {cloneElement(children, {
-        backgroundColor: isActive ? `${colors.white}` : `${colors.primary}`,
-        color: isActive ? `${colors.primary}` : `${colors.white}`,
-      })}
+      <Box w={0.01} bg={isActive ? colors.white : 'transparent'} />
+      {cloneElement(children)}
     </Link>
   );
-}
+};
+
+export default ActiveLink;
