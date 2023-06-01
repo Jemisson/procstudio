@@ -9,7 +9,7 @@ const signInRequest = async (data: ISignInRequestData) => {
     );
     return response.data;
   } catch (error) {
-    return error;
+    console.log(error);
   }
 };
 

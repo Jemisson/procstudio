@@ -5,6 +5,10 @@ interface IButtonProps {
   isLoading: boolean;
 }
 
+interface IFormProps {
+  isErrored: boolean;
+}
+
 export const Container = styled.div`
   min-height: 100vh;
   display: flex;
@@ -46,7 +50,7 @@ export const Content = styled.div`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<IFormProps>`
   width: 100%;
   border-radius: 4px;
   padding: 0.5rem 0.75rem;
@@ -65,6 +69,17 @@ export const Input = styled.input`
     box-shadow: 0 0 0 3px rgba(0, 135, 95, 0.3);
     z-index: 20;
   }
+
+  ${props =>
+    props.isErrored &&
+    css`
+      border-color: ${colors.error};
+      box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.3);
+
+      &:focus {
+        border-color: ${colors.error};
+        box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.3);
+    `}
 
   @media (max-width: 768px) {
     font-size: 0.9rem;
@@ -97,6 +112,7 @@ export const Button = styled.button<IButtonProps>`
 
   width: 100%;
   height: 42px;
+  margin-top: 8px;
   font-weight: 500;
   font-size: 0.875rem;
   padding: 0.5rem 1rem;

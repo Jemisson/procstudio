@@ -15,6 +15,10 @@ export const Container = styled.span`
     border-bottom: 1px solid ${colors.border};
   }
 
+  .subItem {
+    margin-top: 0 !important;
+  }
+
   a {
     display: flex;
     position: relative;
@@ -25,19 +29,10 @@ export const Container = styled.span`
     padding: 6px 0;
     margin-top: 16px !important;
 
-    ::before {
-      content: '';
-      position: absolute;
-      bottom: 6px;
-      left: 0;
-      width: 0%;
-      height: 2.07px;
-      background-color: ${colors.white};
-      transition: width 0.3s ease-in-out;
-    }
-
-    :hover::before {
-      width: 100%;
+    :hover {
+      .arrow {
+        color: ${colors.quartiary};
+      }
     }
 
     .icon {
@@ -63,17 +58,6 @@ export const CloseDropdown = styled.div`
   top: 0;
   left: 0;
   background-color: transparent;
-`;
-
-const menuAnimation = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 `;
 
 export const SelectContainer = styled.div<IMenuUserProps>`
@@ -104,16 +88,11 @@ export const SelectContainer = styled.div<IMenuUserProps>`
     border-radius: 4px;
     box-shadow: ${border.shadow};
     background-color: ${colors.primary};
-    animation: ${menuAnimation} 0.3s ease-in-out forwards;
 
     .selectItem {
       padding: 2px 8px;
       cursor: pointer;
       color: ${colors.white};
-
-      :hover {
-        transform: scaleY(1.02);
-      }
     }
   }
 `;

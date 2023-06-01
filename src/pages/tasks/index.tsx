@@ -4,37 +4,32 @@ import { withAuth } from '@/middleware/withAuth';
 import { colors, Title, DescriptionText } from '@/styles/globals';
 import { Container, ContentContainer, Input } from './styles';
 import {
-  MdOutlineMoreHoriz,
   MdOutlineAddCircle,
+  MdVisibility,
+  MdModeEdit,
   MdSearch,
 } from 'react-icons/md';
 
 import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
-import { clientData } from '../../services';
 import { Layout, Footer } from '@/components';
-import { IClientProps } from '@/interfaces/IClients';
 
 import { parseCookies } from 'nookies';
 import { GetServerSideProps } from 'next';
 
-const Clients = () => {
-  const [clientsList, setClientsList] = useState<IClientProps[]>([]);
-
+const Tasks = () => {
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
   };
 
-  useEffect(() => {
-    setClientsList(clientData);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <Layout>
         <Container>
-          <Title>{'Clientes'}</Title>
+          <Title>{'Tarefas'}</Title>
 
           <ContentContainer>
             <Box display={'flex'} justifyContent={'space-between'}>
@@ -42,7 +37,7 @@ const Clients = () => {
                 <Input>
                   <input
                     type="text"
-                    placeholder="Buscar Cliente"
+                    placeholder="Buscar Tarefa"
                     onChange={e => console.log('Busca', e.target.value)}
                   />
                   <MdSearch size={25} />
@@ -71,75 +66,73 @@ const Clients = () => {
               <DataGrid
                 disableColumnMenu
                 disableRowSelectionOnClick
-                rows={
-                  clientsList &&
-                  clientsList.map((client: IClientProps, index: number) => ({
-                    id: index,
-                    name: client.name,
-                    type: client.type,
-                    cpf: client.cpf,
-                    email: client.emails[0].email,
-                    city: client.addresses[0].city,
-                    contact: client.phones[0].phone,
-                  }))
-                }
+                rows={[]}
                 columns={[
                   {
                     flex: 1,
-                    field: 'name',
+                    field: 'editar',
                     headerName: 'Nome',
-                    align: 'center',
-                    headerAlign: 'center',
-                  },
-                  {
-                    flex: 1,
-                    field: 'type',
-                    headerName: 'Tipo',
-                    align: 'center',
-                    headerAlign: 'center',
-                  },
-                  {
-                    flex: 1,
-                    field: 'cpf',
-                    headerName: 'CPF',
-                    align: 'center',
-                    headerAlign: 'center',
-                    sortable: false,
-                  },
-                  {
-                    flex: 1,
-                    field: 'email',
-                    headerName: 'Email',
-                    align: 'center',
-                    headerAlign: 'center',
-                    sortable: false,
-                  },
-                  {
-                    flex: 1,
-                    field: 'city',
-                    headerName: 'Cidade',
-                    align: 'center',
-                    headerAlign: 'center',
-                    sortable: false,
-                  },
-                  {
-                    flex: 1,
-                    field: 'contact',
-                    headerName: 'Contato',
-                    align: 'center',
-                    headerAlign: 'center',
-                    sortable: false,
-                  },
-                  {
-                    flex: 1,
-                    field: 'actions',
-                    headerName: 'Ações',
                     align: 'center',
                     headerAlign: 'center',
                     sortable: false,
                     editable: false,
                     renderCell: (params: any) => (
-                      <MdOutlineMoreHoriz
+                      <MdModeEdit
+                        size={20}
+                        cursor="pointer"
+                        onClick={() => console.log('Actions', params)}
+                      />
+                    ),
+                  },
+                  {
+                    flex: 1,
+                    field: 'description',
+                    headerName: 'Descrição',
+                    align: 'center',
+                    headerAlign: 'center',
+                  },
+                  {
+                    flex: 1,
+                    field: 'client',
+                    headerName: 'Cliente',
+                    align: 'center',
+                    headerAlign: 'center',
+                    sortable: false,
+                  },
+                  {
+                    flex: 1,
+                    field: 'work',
+                    headerName: 'Trabalho',
+                    align: 'center',
+                    headerAlign: 'center',
+                    sortable: false,
+                  },
+                  {
+                    flex: 1,
+                    field: 'limitDate',
+                    headerName: 'Data Limite',
+                    align: 'center',
+                    headerAlign: 'center',
+                    sortable: false,
+                  },
+                  {
+                    flex: 1,
+                    field: 'status',
+                    headerName: 'Status',
+                    align: 'center',
+                    headerAlign: 'center',
+                    sortable: false,
+                  },
+                  {
+                    flex: 1,
+                    field: 'details',
+                    headerName: 'Detalhes',
+                    align: 'center',
+                    headerAlign: 'center',
+                    sortable: false,
+                    editable: false,
+                    renderCell: (params: any) => (
+                      <MdVisibility
                         size={20}
                         cursor="pointer"
                         onClick={() => console.log('Actions', params)}
@@ -152,7 +145,7 @@ const Clients = () => {
                   pagination: { paginationModel: { pageSize: 10 } },
                 }}
                 localeText={{
-                  noRowsLabel: 'Nenhum cliente encontrado',
+                  noRowsLabel: 'Nenhuma tarefa encontrada',
                   MuiTablePagination: {
                     labelRowsPerPage: 'Linhas por página',
                     labelDisplayedRows(paginationInfo) {
@@ -171,4 +164,4 @@ const Clients = () => {
   );
 };
 
-export default withAuth(Clients);
+export default withAuth(Tasks);

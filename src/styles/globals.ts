@@ -17,6 +17,8 @@ export const colors = {
   primaryOpacity: 'rgba(42, 63, 84, 0.3)',
   secondary: '#1D79FB',
   tertiary: '#7F7F7F',
+  quartiary: '#26B99A',
+  quartiaryHover: '#1D7E68',
   green: '#29A744',
   border: '#9B9B9B',
   icons: '#41414D',
@@ -33,6 +35,13 @@ export const border = {
   shadow: `0px 5px 5px -3px rgba(0, 0, 0, 0.2),
   0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)`,
 };
+
+export const Title = styled.div`
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: ${colors.primary};
+`;
 
 export const DescriptionText = styled.text`
   font-size: 16px;

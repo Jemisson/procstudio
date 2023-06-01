@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 import { ActiveLink } from '@/components';
 import BoxMaterial from '@mui/material/Box';
@@ -107,7 +108,9 @@ const Drawer = styled(MuiDrawer, {
 
 const Layout = ({ children }: ILayoutProps) => {
   const theme = useTheme();
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const { asPath } = useRouter();
+
+  const [openSidebar, setOpenSidebar] = useState(true);
   const [openUserMenu, setOpenUserMenu] = useState(false);
 
   const userConfig = [
@@ -204,7 +207,16 @@ const Layout = ({ children }: ILayoutProps) => {
           <Box color={colors.white} w={'100%'}>
             <Stack spacing="8" w={'100%'}>
               <ActiveLink href="/">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdHome size={24} className="icon" />
                   {openSidebar && (
                     <>
@@ -216,7 +228,16 @@ const Layout = ({ children }: ILayoutProps) => {
               </ActiveLink>
 
               <ActiveLink href="/clients">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/clients'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdGroups size={24} className="icon" />
                   {openSidebar && (
                     <>
@@ -228,19 +249,56 @@ const Layout = ({ children }: ILayoutProps) => {
               </ActiveLink>
 
               <ActiveLink href="/works">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/works'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdHandyman size={24} className="icon" />
                   {openSidebar && (
                     <>
                       <Text fontWeight="medium">{'Trabalhos'}</Text>
-                      <MdOutlineArrowRight size={24} className="arrow" />
+
+                      <MdOutlineArrowRight
+                        size={24}
+                        className="arrow"
+                        style={{
+                          transform:
+                            asPath === '/new_work' ? 'rotate(90deg)' : 'none',
+                        }}
+                      />
                     </>
                   )}
                 </Flex>
               </ActiveLink>
-
+              {asPath === '/new_work' && (
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  justifyContent={'center'}
+                  className="subItem"
+                >
+                  {openSidebar && (
+                    <Text fontWeight="medium">{'Novo Trabalho'}</Text>
+                  )}
+                </Flex>
+              )}
               <ActiveLink href="/tasks">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/tasks'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdOutlineFormatListNumbered size={24} className="icon" />
                   {openSidebar && (
                     <>
@@ -252,7 +310,16 @@ const Layout = ({ children }: ILayoutProps) => {
               </ActiveLink>
 
               <ActiveLink href="/users">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/users'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdPerson size={24} className="icon" />
                   {openSidebar && (
                     <>
@@ -264,7 +331,16 @@ const Layout = ({ children }: ILayoutProps) => {
               </ActiveLink>
 
               <ActiveLink href="/office">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/office'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdAccountBalance size={24} className="icon" />
                   {openSidebar && (
                     <>
@@ -276,7 +352,16 @@ const Layout = ({ children }: ILayoutProps) => {
               </ActiveLink>
 
               <ActiveLink href="/reports">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/reports'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdOutlineListAlt size={24} className="icon" />
                   {openSidebar && (
                     <>
@@ -288,7 +373,16 @@ const Layout = ({ children }: ILayoutProps) => {
               </ActiveLink>
 
               <ActiveLink href="/documents">
-                <Flex w={'100%'} alignItems={'center'}>
+                <Flex
+                  w={'100%'}
+                  alignItems={'center'}
+                  style={{
+                    background:
+                      asPath === '/documents'
+                        ? 'rgba(255, 255, 255, 0.2)'
+                        : 'transparent',
+                  }}
+                >
                   <MdOutlineDescription size={24} className="icon" />
                   {openSidebar && (
                     <>

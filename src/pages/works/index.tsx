@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
+import Link from 'next/link';
 
 import { colors, Title, DescriptionText } from '@/styles/globals';
 import { Container, ContentContainer, Input } from './styles';
@@ -12,29 +13,23 @@ import {
 import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
-import { clientData } from '../../services';
 import { Layout, Footer } from '@/components';
-import { IClientProps } from '@/interfaces/IClients';
 
 import { parseCookies } from 'nookies';
 import { GetServerSideProps } from 'next';
 
-const Clients = () => {
-  const [clientsList, setClientsList] = useState<IClientProps[]>([]);
-
+const Works = () => {
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
   };
 
-  useEffect(() => {
-    setClientsList(clientData);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <>
       <Layout>
         <Container>
-          <Title>{'Clientes'}</Title>
+          <Title>{'Trabalhos'}</Title>
 
           <ContentContainer>
             <Box display={'flex'} justifyContent={'space-between'}>
@@ -42,90 +37,81 @@ const Clients = () => {
                 <Input>
                   <input
                     type="text"
-                    placeholder="Buscar Cliente"
+                    placeholder="Buscar Trabalho"
                     onChange={e => console.log('Busca', e.target.value)}
                   />
                   <MdSearch size={25} />
                 </Input>
               </Box>
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{
-                  backgroundColor: colors.quartiary,
-                  color: colors.white,
-                  height: 36,
-                  '&:hover': {
-                    backgroundColor: colors.quartiaryHover,
-                  },
-                }}
-                onClick={() => console.log('Adicionar')}
-              >
-                <DescriptionText className="ml-8">
-                  {'Adicionar'}
-                </DescriptionText>
-                <MdOutlineAddCircle size={20} />
-              </Button>
+              <Link href="/new_work">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{
+                    backgroundColor: colors.quartiary,
+                    color: colors.white,
+                    height: 36,
+                    '&:hover': {
+                      backgroundColor: colors.quartiaryHover,
+                    },
+                  }}
+                  onClick={() => console.log('Adicionar')}
+                >
+                  <DescriptionText className="ml-8">
+                    {'Adicionar'}
+                  </DescriptionText>
+                  <MdOutlineAddCircle size={20} />
+                </Button>
+              </Link>
             </Box>
             <Box mt={'20px'} sx={{ height: 450 }}>
               <DataGrid
                 disableColumnMenu
                 disableRowSelectionOnClick
-                rows={
-                  clientsList &&
-                  clientsList.map((client: IClientProps, index: number) => ({
-                    id: index,
-                    name: client.name,
-                    type: client.type,
-                    cpf: client.cpf,
-                    email: client.emails[0].email,
-                    city: client.addresses[0].city,
-                    contact: client.phones[0].phone,
-                  }))
-                }
+                rows={[]}
                 columns={[
                   {
                     flex: 1,
-                    field: 'name',
-                    headerName: 'Nome',
+                    field: 'client',
+                    headerName: 'Cliente',
                     align: 'center',
                     headerAlign: 'center',
                   },
                   {
                     flex: 1,
-                    field: 'type',
-                    headerName: 'Tipo',
+                    field: 'procedure',
+                    headerName: 'Procedimento',
                     align: 'center',
                     headerAlign: 'center',
                   },
                   {
                     flex: 1,
-                    field: 'cpf',
-                    headerName: 'CPF',
-                    align: 'center',
-                    headerAlign: 'center',
-                    sortable: false,
-                  },
-                  {
-                    flex: 1,
-                    field: 'email',
-                    headerName: 'Email',
+                    field: 'subject',
+                    headerName: 'Assunto',
                     align: 'center',
                     headerAlign: 'center',
                     sortable: false,
                   },
                   {
                     flex: 1,
-                    field: 'city',
-                    headerName: 'Cidade',
+                    field: 'requestProcess',
+                    headerName: 'Requerimento/Processo',
                     align: 'center',
                     headerAlign: 'center',
                     sortable: false,
                   },
                   {
                     flex: 1,
-                    field: 'contact',
-                    headerName: 'Contato',
+                    field: 'responsible',
+                    headerName: 'Responsável',
+                    align: 'center',
+                    headerAlign: 'center',
+                    sortable: false,
+                  },
+                  {
+                    flex: 1,
+                    field: 'partner',
+                    headerName: 'Parceiro',
                     align: 'center',
                     headerAlign: 'center',
                     sortable: false,
@@ -152,7 +138,7 @@ const Clients = () => {
                   pagination: { paginationModel: { pageSize: 10 } },
                 }}
                 localeText={{
-                  noRowsLabel: 'Nenhum cliente encontrado',
+                  noRowsLabel: 'Nenhum trablaho encontrado',
                   MuiTablePagination: {
                     labelRowsPerPage: 'Linhas por página',
                     labelDisplayedRows(paginationInfo) {
@@ -171,4 +157,4 @@ const Clients = () => {
   );
 };
 
-export default withAuth(Clients);
+export default withAuth(Works);
