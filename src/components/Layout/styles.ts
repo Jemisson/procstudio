@@ -24,14 +24,21 @@ export const Container = styled.span`
     position: relative;
     width: 100%;
     height: 56px;
-    font-weight: 500;
 
     padding: 6px 0;
     margin-top: 16px !important;
 
+    .arrowWork {
+      transition: transform 0.3s ease;
+    }
+
     :hover {
       .arrow {
         color: ${colors.quartiary};
+      }
+
+      .arrowWork {
+        transform: rotate(0deg) !important;
       }
     }
 

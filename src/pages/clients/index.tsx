@@ -16,9 +16,6 @@ import { clientData } from '../../services';
 import { Layout, Footer } from '@/components';
 import { IClientProps } from '@/interfaces/IClients';
 
-import { parseCookies } from 'nookies';
-import { GetServerSideProps } from 'next';
-
 const Clients = () => {
   const [clientsList, setClientsList] = useState<IClientProps[]>([]);
 

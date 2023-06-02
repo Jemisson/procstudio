@@ -15,9 +15,6 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { Layout, Footer } from '@/components';
 
-import { parseCookies } from 'nookies';
-import { GetServerSideProps } from 'next';
-
 const Works = () => {
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
@@ -90,7 +87,6 @@ const Works = () => {
                     headerName: 'Assunto',
                     align: 'center',
                     headerAlign: 'center',
-                    sortable: false,
                   },
                   {
                     flex: 1,
@@ -98,7 +94,6 @@ const Works = () => {
                     headerName: 'Requerimento/Processo',
                     align: 'center',
                     headerAlign: 'center',
-                    sortable: false,
                   },
                   {
                     flex: 1,
@@ -106,7 +101,6 @@ const Works = () => {
                     headerName: 'Responsável',
                     align: 'center',
                     headerAlign: 'center',
-                    sortable: false,
                   },
                   {
                     flex: 1,
@@ -114,7 +108,6 @@ const Works = () => {
                     headerName: 'Parceiro',
                     align: 'center',
                     headerAlign: 'center',
-                    sortable: false,
                   },
                   {
                     flex: 1,
@@ -122,7 +115,6 @@ const Works = () => {
                     headerName: 'Ações',
                     align: 'center',
                     headerAlign: 'center',
-                    sortable: false,
                     editable: false,
                     renderCell: (params: any) => (
                       <MdOutlineMoreHoriz

@@ -220,7 +220,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdHome size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Página inicial'}</Text>
+                      <Text fontWeight="regular">{'Página inicial'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -241,7 +241,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdGroups size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Clientes'}</Text>
+                      <Text fontWeight="regular">{'Clientes'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -262,11 +262,11 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdHandyman size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Trabalhos'}</Text>
+                      <Text fontWeight="regular">{'Trabalhos'}</Text>
 
                       <MdOutlineArrowRight
                         size={24}
-                        className="arrow"
+                        className="arrow arrowWork"
                         style={{
                           transform:
                             asPath === '/new_work' ? 'rotate(90deg)' : 'none',
@@ -284,7 +284,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   className="subItem"
                 >
                   {openSidebar && (
-                    <Text fontWeight="medium">{'Novo Trabalho'}</Text>
+                    <Text fontWeight="regular">{'Novo Trabalho'}</Text>
                   )}
                 </Flex>
               )}
@@ -302,7 +302,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdOutlineFormatListNumbered size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Tarefas'}</Text>
+                      <Text fontWeight="regular">{'Tarefas'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -323,7 +323,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdPerson size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Usuários'}</Text>
+                      <Text fontWeight="regular">{'Usuários'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -344,7 +344,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdAccountBalance size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Escritório'}</Text>
+                      <Text fontWeight="regular">{'Escritório'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -365,7 +365,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdOutlineListAlt size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Relatórios'}</Text>
+                      <Text fontWeight="regular">{'Relatórios'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -386,7 +386,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdOutlineDescription size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="medium">{'Documentos'}</Text>
+                      <Text fontWeight="regular">{'Documentos'}</Text>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
