@@ -6,6 +6,11 @@ export const theme = createTheme({
     primary: {
       main: '#2A3F54',
     },
+
+    secondary: {
+      main: '#26B99A',
+    },
+
     error: {
       main: '#CD0D15',
     },

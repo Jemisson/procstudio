@@ -15,9 +15,6 @@ import { DataGrid } from '@mui/x-data-grid';
 
 import { Layout, Footer } from '@/components';
 
-import { parseCookies } from 'nookies';
-import { GetServerSideProps } from 'next';
-
 const Tasks = () => {
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
