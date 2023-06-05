@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 import Link from 'next/link';
 
-import { colors, Title, DescriptionText } from '@/styles/globals';
-import { Container, ContentContainer, Input } from './styles';
+import { colors, TitlePage, DescriptionText } from '@/styles/globals';
+import { Container, ContentContainer, InputContainer } from './styles';
 import {
   MdOutlineMoreHoriz,
   MdOutlineAddCircle,
@@ -26,21 +26,21 @@ const Works = () => {
     <>
       <Layout>
         <Container>
-          <Title>{'Trabalhos'}</Title>
+          <TitlePage>{'Trabalhos'}</TitlePage>
 
           <ContentContainer>
             <Box display={'flex'} justifyContent={'space-between'}>
               <Box>
-                <Input>
+                <InputContainer>
                   <input
                     type="text"
                     placeholder="Buscar Trabalho"
                     onChange={e => console.log('Busca', e.target.value)}
                   />
                   <MdSearch size={25} />
-                </Input>
+                </InputContainer>
               </Box>
-              <Link href="/new_work">
+              <Link href="/newWork">
                 <Button
                   variant="contained"
                   color="primary"

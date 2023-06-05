@@ -8,7 +8,7 @@ import { AuthContext } from '../contexts/AuthContext';
 
 import Image from 'next/image';
 import Logo from '../assets/logo-colors@3x.png';
-import { Box, Link, Text } from '@chakra-ui/react';
+import { Box, Link, Typography } from '@mui/material';
 
 import { Container, Content, Input, Form, Button } from '@/styles/loginStyles';
 
@@ -50,12 +50,12 @@ const Home = () => {
           <Image src={Logo} alt="Logo" />
         </Box>
         <Form onSubmit={handleSubmit(handleSignIn)}>
-          <Text m={'auto'} fontSize="4xl">
+          <Typography sx={{ margin: 'auto', fontSize: '32px' }}>
             {'Seja bem-vindo!'}
-          </Text>
+          </Typography>
 
           <Box>
-            <Box mb={4}>
+            <Box mb={2}>
               <Input
                 isErrored={!!errors.email}
                 {...register('email')}
@@ -80,8 +80,16 @@ const Home = () => {
           </Box>
 
           <Box display={'flex'} justifyContent={'center'}>
-            <Button isLoading={loading} type="submit">
-              {loading ? 'Carregando...' : 'ENTRAR'}
+            <Button
+              isLoading={loading}
+              type="submit"
+              style={{
+                cursor: 'pointer',
+              }}
+            >
+              <Typography variant="button">
+                {loading ? 'Carregando...' : 'ENTRAR'}
+              </Typography>
             </Button>
           </Box>
           <Box

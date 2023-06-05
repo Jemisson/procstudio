@@ -41,11 +41,17 @@ export const border = {
   0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)`,
 };
 
-export const Title = styled.div`
+export const TitlePage = styled.div`
   font-size: 32px;
   font-weight: 500;
   margin-bottom: 20px;
   color: ${colors.primary};
+`;
+
+export const Title = styled.text`
+  font-size: 20px;
+  font-weight: 500;
+  color: ${colors.secondary};
 `;
 
 export const DescriptionText = styled.text`

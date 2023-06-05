@@ -18,9 +18,12 @@ export const Container = styled.div`
   padding: 3rem 1rem;
 
   .imageContainer {
-    width: 200px;
+    width: 240px;
+    height: 130px;
+
     img {
       width: 100%;
+      object-fit: contain;
     }
   }
 
@@ -47,6 +50,10 @@ export const Content = styled.div`
 
   @media (max-width: 768px) {
     padding: 1rem;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 

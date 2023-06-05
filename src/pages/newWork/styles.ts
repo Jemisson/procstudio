@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Flex } from '@chakra-ui/react';
 import { colors } from '@/styles/globals';
 
 export const Container = styled.div`
@@ -34,7 +33,16 @@ export const ContentContainer = styled.div`
   background-color: ${colors.white};
 `;
 
-export const Content = styled(Flex)`
+export const Content = styled.div`
+  display: flex;
   flex-direction: column;
+
+  height: 778px;
   padding: 0 16px;
+
+  .buttonContainer {
+    display: flex;
+    justify-content: end;
+    margin-top: auto;
+  }
 `;
