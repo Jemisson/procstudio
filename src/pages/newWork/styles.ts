@@ -37,12 +37,12 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  height: 778px;
+  min-height: 778px;
   padding: 0 16px;
 
   .buttonContainer {
     display: flex;
     justify-content: end;
-    margin-top: auto;
+    margin-top: 16px;
   }
 `;
