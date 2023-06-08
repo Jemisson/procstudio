@@ -58,7 +58,7 @@ const Clients = () => {
                 }}
                 onClick={() => console.log('Adicionar')}
               >
-                <DescriptionText className="ml-8">
+                <DescriptionText style={{ cursor: 'pointer' }} className="ml-8">
                   {'Adicionar'}
                 </DescriptionText>
                 <MdOutlineAddCircle size={20} />

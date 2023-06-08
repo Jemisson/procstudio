@@ -79,7 +79,11 @@ const Home = () => {
             </Box>
           </Box>
 
-          <Box display={'flex'} justifyContent={'center'}>
+          <Box
+            display={'flex'}
+            justifyContent={'center'}
+            sx={{ marginTop: '8px' }}
+          >
             <Button
               isLoading={loading}
               type="submit"

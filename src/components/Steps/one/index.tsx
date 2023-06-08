@@ -1,13 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import React, { useCallback, useEffect, useState } from 'react';
+import Dropzone from 'react-dropzone';
 
+import { colors } from '@/styles/globals';
 import CustomTooltip from '../../Tooltip';
-import { MdOutlineInfo } from 'react-icons/md';
+import { MdOutlineInfo, MdDelete } from 'react-icons/md';
 
 import { IMoreTaxMatter } from '@/interfaces/ISteps';
+import Notification from '@/components/Notification';
 
-import { Container, Flex, InputContainer, SubjectOptionsArea } from './styles';
+import {
+  Container,
+  Flex,
+  InputContainer,
+  SubjectOptionsArea,
+  Input,
+  DropContainer,
+  FileList,
+} from './styles';
+
 import {
   Box,
   FormControl,
@@ -15,20 +25,19 @@ import {
   Typography,
   Checkbox,
   Radio,
+  TextField,
+  TextareaAutosize,
+  Autocomplete,
 } from '@mui/material';
 
 const StepOne = () => {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
   const [presets, setPresets] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState('');
   const [selectedProcedures, setSelectedProcedures] = useState<string[]>([]);
   const [customersList, setCustomersList] = useState([
-    { title: 'The Shawshank Redemption', year: 1994 },
-    { title: 'The Godfather', year: 1972 },
-    { title: 'The Godfather: Part II', year: 1974 },
-    { title: 'The Dark Knight', year: 2008 },
-    { title: '12 Angry Men', year: 1957 },
-    { title: "Schindler's List", year: 1993 },
-    { title: 'Pulp Fiction', year: 1994 },
+    { id: 19, name: 'The Shawshank Redemption' },
   ]);
 
   const [civilMatter, setCivilMatter] = useState('');
@@ -36,7 +45,58 @@ const StepOne = () => {
   const [laborMatter, setLaborMatter] = useState('');
   const [taxMatter, setTaxMatter] = useState('');
   const [moreTaxMatter, setMoreTaxMatter] = useState<IMoreTaxMatter>();
+  const [selectedFile, setSelectedFile] = useState<File[] | null>(null);
   const [anotherSubjects, setAnotherSubjects] = useState('');
+
+  const [compensationsLastYears, setCompensationsLastYears] = useState('');
+  const [compensationsExOfficio, setCompensationsExOfficio] = useState('');
+  const [hasALawsuit, setHasALawsuit] = useState('');
+  const [gainProjection, setGainProjection] = useState();
+
+  const renderDragMessage = (isDragActive: boolean) => {
+    if (!isDragActive) {
+      return <p>Arraste arquivos aqui...</p>;
+    }
+    return <p>Solte os arquivos aqui</p>;
+  };
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const droppedFiles = event.dataTransfer.files;
+
+    for (let i = 0; i < droppedFiles.length; i++) {
+      const droppedFile = droppedFiles[i];
+      if (droppedFile) {
+        const fileName = droppedFile.name;
+        const fileExtension = fileName.split('.').pop()?.toLowerCase();
+        const allowedExtensions = ['jpeg', 'jpg', 'png', 'pdf'];
+
+        if (fileExtension && allowedExtensions.includes(fileExtension)) {
+          console.log('Arquivo:', droppedFile);
+          setSelectedFile(prevSelected => [
+            ...(prevSelected || []),
+            droppedFile,
+          ]);
+        } else {
+          setOpenSnackbar(true);
+        }
+      }
+    }
+  };
+
+  const handleDeleteFile = (fileToDelete: File) => {
+    setSelectedFile((prevSelected: any) =>
+      prevSelected.filter((file: any) => file !== fileToDelete),
+    );
+  };
+
+  const handleDragOver = (event: any) => {
+    event.preventDefault();
+  };
 
   const handleProcedureSelection = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -53,7 +113,6 @@ const StepOne = () => {
   };
 
   const handleCategorySelection = (value: string) => {
-    console.log('Valor do Input', value);
     setSelectedSubject(value);
   };
 
@@ -126,9 +185,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="tempoDeContribuicao"
-                      checked={civilMatter === 'tempoDeContribuicao'}
+                      checked={socialSecurityMatter === 'tempoDeContribuicao'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setSocialSecurityMatter(e.target.value)
                       }
                     />
                   }
@@ -141,9 +200,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="porIdade"
-                      checked={civilMatter === 'porIdade'}
+                      checked={socialSecurityMatter === 'porIdade'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setSocialSecurityMatter(e.target.value)
                       }
                     />
                   }
@@ -156,9 +215,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="rural"
-                      checked={civilMatter === 'rural'}
+                      checked={socialSecurityMatter === 'rural'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setSocialSecurityMatter(e.target.value)
                       }
                     />
                   }
@@ -171,9 +230,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="disabilityBenefits"
-                      checked={civilMatter === 'disabilityBenefits'}
+                      checked={socialSecurityMatter === 'disabilityBenefits'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setSocialSecurityMatter(e.target.value)
                       }
                     />
                   }
@@ -186,9 +245,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="socialSecurityReview"
-                      checked={civilMatter === 'socialSecurityReview'}
+                      checked={socialSecurityMatter === 'socialSecurityReview'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setSocialSecurityMatter(e.target.value)
                       }
                     />
                   }
@@ -202,11 +261,11 @@ const StepOne = () => {
                     <Radio
                       value="timeRecognition_adjustment_administrativeServices"
                       checked={
-                        civilMatter ===
+                        socialSecurityMatter ===
                         'timeRecognition_adjustment_administrativeServices'
                       }
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setSocialSecurityMatter(e.target.value)
                       }
                     />
                   }
@@ -228,9 +287,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="laborComplaint"
-                      checked={civilMatter === 'laborComplaint'}
+                      checked={laborMatter === 'laborComplaint'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setLaborMatter(e.target.value)
                       }
                     />
                   }
@@ -252,9 +311,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="asphalt"
-                      checked={civilMatter === 'asphalt'}
+                      checked={taxMatter === 'asphalt'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setTaxMatter(e.target.value)
                       }
                     />
                   }
@@ -267,9 +326,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="license"
-                      checked={civilMatter === 'license'}
+                      checked={taxMatter === 'license'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setTaxMatter(e.target.value)
                       }
                     />
                   }
@@ -282,9 +341,9 @@ const StepOne = () => {
                   control={
                     <Radio
                       value="other"
-                      checked={civilMatter === 'other'}
+                      checked={taxMatter === 'other'}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setCivilMatter(e.target.value)
+                        setTaxMatter(e.target.value)
                       }
                     />
                   }
@@ -295,13 +354,196 @@ const StepOne = () => {
           </FormControl>
         );
       case 'tributary_pis_CofinsInputs':
-        return <FormControl></FormControl>;
+        return (
+          <FormControl style={{ width: '100%' }}>
+            <Flex style={{ alignItems: 'center', width: '100%' }}>
+              <Typography variant="h6" sx={{ marginRight: '16px' }}>
+                {'Compensações realizadas nos últimos 5 anos:'}
+              </Typography>
+              <Box>
+                <FormControlLabel
+                  control={
+                    <Radio
+                      value="yes"
+                      checked={compensationsLastYears === 'yes'}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setCompensationsLastYears(e.target.value)
+                      }
+                    />
+                  }
+                  label="Sim"
+                />
+              </Box>
+              <Box>
+                <FormControlLabel
+                  control={
+                    <Radio
+                      value="no"
+                      checked={compensationsLastYears === 'no'}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setCompensationsLastYears(e.target.value)
+                      }
+                    />
+                  }
+                  label="Não"
+                />
+              </Box>
+            </Flex>
+
+            <Flex style={{ alignItems: 'center' }}>
+              <Typography variant="h6" sx={{ marginRight: '16px' }}>
+                {'Compensações de ofício:'}
+              </Typography>
+              <Box>
+                <FormControlLabel
+                  control={
+                    <Radio
+                      value="yes"
+                      checked={compensationsExOfficio === 'yes'}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setCompensationsExOfficio(e.target.value)
+                      }
+                    />
+                  }
+                  label="Sim"
+                />
+              </Box>
+              <Box>
+                <FormControlLabel
+                  control={
+                    <Radio
+                      value="no"
+                      checked={compensationsExOfficio === 'no'}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setCompensationsExOfficio(e.target.value)
+                      }
+                    />
+                  }
+                  label="Não"
+                />
+              </Box>
+            </Flex>
+
+            <Flex style={{ alignItems: 'center' }}>
+              <Typography variant="h6" sx={{ marginRight: '16px' }}>
+                {'Possui ação judicial:'}
+              </Typography>
+
+              <Box>
+                <FormControlLabel
+                  control={
+                    <Radio
+                      value="yes"
+                      checked={hasALawsuit === 'yes'}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setHasALawsuit(e.target.value)
+                      }
+                    />
+                  }
+                  label="Sim"
+                />
+              </Box>
+              <Box>
+                <FormControlLabel
+                  control={
+                    <Radio
+                      value="naoAcaoJudicial"
+                      checked={hasALawsuit === 'naoAcaoJudicial'}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setHasALawsuit(e.target.value)
+                      }
+                    />
+                  }
+                  label="Não"
+                />
+              </Box>
+            </Flex>
+
+            <Flex style={{ flexDirection: 'column', width: '100%' }}>
+              <Typography variant="h6">{'Projeção de ganho'}</Typography>
+
+              <FormControl sx={{ width: '314px' }}>
+                <Input
+                  placeholder="00"
+                  min="0"
+                  value={gainProjection}
+                  onInput={(e: any) => {
+                    e.target.value = e.target.value.replace(/[^0-9.,]/g, '');
+                  }}
+                  onBlur={e => console.log('onBlur', e.target.value)}
+                />
+              </FormControl>
+            </Flex>
+
+            <Flex style={{ flexDirection: 'column', marginTop: '16px' }}>
+              <Typography variant="h6" sx={{ marginBottom: '8px' }}>
+                {'Upload de arquivos'}
+              </Typography>
+
+              <FormControl sx={{ width: '100%', height: '100%' }}>
+                <Flex style={{ flexDirection: 'row' }}>
+                  <Dropzone>
+                    {({ getRootProps, getInputProps, isDragActive }) => (
+                      <DropContainer>
+                        <Flex
+                          {...getRootProps()}
+                          onDrop={handleDrop}
+                          onDragOver={handleDragOver}
+                        >
+                          <input
+                            {...getInputProps({
+                              accept: '.jpeg, .jpg, .png, .pdf',
+                              multiple: true,
+                            })}
+                          />
+                          {renderDragMessage(isDragActive)}
+                        </Flex>
+                      </DropContainer>
+                    )}
+                  </Dropzone>
+                  <FileList>
+                    {selectedFile && selectedFile.length > 0 ? (
+                      selectedFile.map((file, index) => (
+                        <div className="fileName" key={index}>
+                          <span className="name">{file.name}</span>
+                          <MdDelete
+                            size={20}
+                            color={colors.icons}
+                            style={{ cursor: 'pointer', marginLeft: '5px' }}
+                            onClick={() => handleDeleteFile(file)}
+                          />
+                        </div>
+                      ))
+                    ) : (
+                      <Typography variant="caption" sx={{ margin: 'auto' }}>
+                        {'Nenhum arquivo selecionado'}
+                      </Typography>
+                    )}
+                  </FileList>
+                </Flex>
+                <Typography variant="caption" sx={{ marginTop: '8px' }}>
+                  {'Formatos aceitos: JPEG, PNG, e PDF.'}
+                </Typography>
+
+                <Notification
+                  open={openSnackbar}
+                  message="Formato de arquivo inválido. Por favor, escolha um arquivo .jpeg, .jpg, .png ou .pdf."
+                  severity="error"
+                  onClose={handleCloseSnackbar}
+                />
+              </FormControl>
+            </Flex>
+          </FormControl>
+        );
       case 'other':
         return (
-          <FormControl>
-            <Typography variant="h6" sx={{ marginBottom: '8px' }}>
-              {'Descreva a área:'}
-            </Typography>
+          <FormControl sx={{ width: '100%', height: '100%' }}>
+            <Typography variant="h6">{'Descreva a área:'}</Typography>
+            <TextareaAutosize
+              value={anotherSubjects}
+              onChange={e => setAnotherSubjects(e.target.value)}
+              className="comment-input"
+            />
           </FormControl>
         );
       default:
@@ -312,6 +554,7 @@ const StepOne = () => {
   return (
     <Container>
       <FormControl sx={{ width: '100%' }}>
+        {/* Clients, Application or Process Number and Pre-Sets */}
         <span>
           <Flex style={{ flexDirection: 'column' }}>
             <Typography variant="h6" sx={{ marginBottom: '8px' }}>
@@ -322,7 +565,7 @@ const StepOne = () => {
               limitTags={1}
               id="multiple-limit-tags"
               options={customersList}
-              getOptionLabel={option => option.title}
+              getOptionLabel={option => option.name}
               renderInput={params => (
                 <TextField
                   placeholder="Selecione um Cliente"
@@ -402,6 +645,7 @@ const StepOne = () => {
           </Flex>
         </span>
 
+        {/* Procedure - title */}
         <Flex
           style={{
             flexDirection: 'row',
@@ -425,7 +669,6 @@ const StepOne = () => {
             </span>
           </CustomTooltip>
         </Flex>
-
         <Flex
           style={{
             width: '398px',
@@ -468,6 +711,7 @@ const StepOne = () => {
           />
         </Flex>
 
+        {/* Subject */}
         <Flex style={{ flexDirection: 'row', marginTop: '16px', flex: 1 }}>
           <Flex style={{ flexDirection: 'column', width: '400px' }}>
             <Typography variant="h6" sx={{ marginBottom: '8px' }}>

@@ -48,13 +48,13 @@ export const TitlePage = styled.div`
   color: ${colors.primary};
 `;
 
-export const Title = styled.text`
+export const Title = styled.label`
   font-size: 20px;
   font-weight: 500;
   color: ${colors.secondary};
 `;
 
-export const DescriptionText = styled.text`
+export const DescriptionText = styled.label`
   font-size: 16px;
   font-weight: 300;
 
