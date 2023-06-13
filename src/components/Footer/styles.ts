@@ -11,4 +11,9 @@ export const Container = styled.div`
   padding: 28px 0;
   margin-top: 64px;
   background-color: ${colors.white};
+
+  .links {
+    text-decoration: none;
+    color: ${colors.black};
+  }
 `;

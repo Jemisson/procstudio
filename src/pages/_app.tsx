@@ -1,6 +1,5 @@
 import * as React from 'react';
 import type { AppProps } from 'next/app';
-import { ChakraProvider } from '@chakra-ui/react';
 
 import { theme } from '@/styles/globals';
 import { ThemeProvider } from '@mui/material/styles';
@@ -25,14 +24,12 @@ const StudioApp = (props: StudioAppProps) => {
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
-      <ChakraProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AuthProvider>
-            <Component {...pageProps} />
-          </AuthProvider>
-        </ThemeProvider>
-      </ChakraProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
+      </ThemeProvider>
     </CacheProvider>
   );
 };

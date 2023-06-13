@@ -45,7 +45,7 @@ export const ContentContainer = styled.div`
   }
 `;
 
-export const Input = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;

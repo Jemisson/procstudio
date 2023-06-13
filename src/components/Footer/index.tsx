@@ -2,7 +2,7 @@ import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Typography } from '@mui/material';
 
 import { Container } from './styles';
 import Logo from '../../assets/logo-colors.png';
@@ -29,53 +29,65 @@ const Footer = () => {
       <Box>
         <Box>
           <Image src={Logo} alt="Logo" />
-          <Text>{'Tecnologia para uma vida mais fácil.'}</Text>
+          <Typography>{'Tecnologia para uma vida mais fácil.'}</Typography>
         </Box>
       </Box>
 
       <Box>
         <Box>
           <Box display={'flex'}>
-            <Text fontSize="md" color={colors.black} marginRight={1}>
+            <Typography fontSize="md" color={colors.black} marginRight={1}>
               {'Mapa do Sistema'}
-            </Text>
+            </Typography>
             <MdKeyboardArrowRight size={22} className="arrow" />
           </Box>
-          <Link href={'/clients'}>
-            <Text fontSize="sm">{'Clientes'}</Text>
+          <Link href={'/clients'} className="links">
+            <Typography fontSize="sm">{'Clientes'}</Typography>
           </Link>
-          <Link href={'/works'}>
-            <Text fontSize="sm">{'Trabalhos'}</Text>
+          <Link href={'/works'} className="links">
+            <Typography fontSize="sm">{'Trabalhos'}</Typography>
           </Link>
-          <Link href={'/tasks'}>
-            <Text fontSize="sm">{'Tarefas'}</Text>
+          <Link href={'/tasks'} className="links">
+            <Typography fontSize="sm">{'Tarefas'}</Typography>
           </Link>
-          <Link href={'/users'}>
-            <Text fontSize="sm">{'Usuários'}</Text>
+          <Link href={'/users'} className="links">
+            <Typography fontSize="sm">{'Usuários'}</Typography>
           </Link>
         </Box>
       </Box>
 
       <Box>
         <Box>
-          <Text fontSize="md" color={colors.black}>
+          <Typography fontSize="md" color={colors.black}>
             {`ProcStudio ${currentYear}`}
-          </Text>
-          <Text fontSize="sm">{'Licenciado para ProcStudio'}</Text>
-          <Text fontSize="sm">{'Rui Barbosa,'}</Text>
-          <Text fontSize="sm">{'nº 262, Cascavel - PR'}</Text>
+          </Typography>
+          <Typography fontSize="sm">{'Licenciado para ProcStudio'}</Typography>
+          <Typography fontSize="sm">{'Rui Barbosa,'}</Typography>
+          <Typography fontSize="sm">{'nº 262, Cascavel - PR'}</Typography>
         </Box>
       </Box>
 
-      <Box display={'flex'} flexDir={'column'} justifyContent={'space-between'}>
-        <Box display={'flex'} cursor={'pointer'} onClick={scrollToTop}>
-          <Text fontSize="md" color={colors.black} marginRight={1}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            cursor: 'pointer',
+          }}
+          onClick={scrollToTop}
+        >
+          <Typography fontSize="md" color={colors.black} marginRight={1}>
             {'Voltar ao topo'}
-          </Text>
+          </Typography>
           <MdKeyboardArrowUp size={22} className="arrow" />
         </Box>
 
-        <Box display={'flex'} justifyContent={'end'}>
+        <Box display={'flex'} marginLeft={'auto'}>
           <Link href={'/'}>
             <Image src={Linkedin} alt="Logo" />
           </Link>

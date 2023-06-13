@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 
-import { colors, Title, DescriptionText } from '@/styles/globals';
+import { colors, TitlePage, DescriptionText } from '@/styles/globals';
 import { Container, ContentContainer, Input } from './styles';
 import {
   MdOutlineAddCircle,
@@ -26,7 +26,7 @@ const Tasks = () => {
     <>
       <Layout>
         <Container>
-          <Title>{'Tarefas'}</Title>
+          <TitlePage>{'Tarefas'}</TitlePage>
 
           <ContentContainer>
             <Box display={'flex'} justifyContent={'space-between'}>
@@ -53,7 +53,7 @@ const Tasks = () => {
                 }}
                 onClick={() => console.log('Adicionar')}
               >
-                <DescriptionText className="ml-8">
+                <DescriptionText style={{ cursor: 'pointer' }} className="ml-8">
                   {'Adicionar'}
                 </DescriptionText>
                 <MdOutlineAddCircle size={20} />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 
-import { colors, Title, DescriptionText } from '@/styles/globals';
+import { colors, TitlePage, DescriptionText } from '@/styles/globals';
 import { Container, ContentContainer, Input } from './styles';
 import {
   MdOutlineMoreHoriz,
@@ -31,7 +31,7 @@ const Clients = () => {
     <>
       <Layout>
         <Container>
-          <Title>{'Clientes'}</Title>
+          <TitlePage>{'Clientes'}</TitlePage>
 
           <ContentContainer>
             <Box display={'flex'} justifyContent={'space-between'}>
@@ -58,7 +58,7 @@ const Clients = () => {
                 }}
                 onClick={() => console.log('Adicionar')}
               >
-                <DescriptionText className="ml-8">
+                <DescriptionText style={{ cursor: 'pointer' }} className="ml-8">
                   {'Adicionar'}
                 </DescriptionText>
                 <MdOutlineAddCircle size={20} />

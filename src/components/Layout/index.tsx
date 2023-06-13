@@ -3,13 +3,18 @@ import { useRouter } from 'next/router';
 
 import { ActiveLink } from '@/components';
 import BoxMaterial from '@mui/material/Box';
-import { Box, Flex, Text, Stack } from '@chakra-ui/react';
 
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
 import { AppBarProps, ILayoutProps } from '@/interfaces/ILayout';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
-import { Toolbar, CssBaseline, IconButton } from '@mui/material';
+import {
+  Typography,
+  Stack,
+  Toolbar,
+  CssBaseline,
+  IconButton,
+} from '@mui/material';
 
 import {
   MdHome,
@@ -28,7 +33,7 @@ import {
 
 import Image from 'next/image';
 import { colors } from '@/styles/globals';
-import { Container, SelectContainer, CloseDropdown } from './styles';
+import { Container, SelectContainer, CloseDropdown, Flex } from './styles';
 
 import Logo from '../../assets/logo-white.png';
 import Profile from '../../assets/Profile.png';
@@ -158,33 +163,33 @@ const Layout = ({ children }: ILayoutProps) => {
               onClick={() => setOpenUserMenu(false)}
             />
             <Image src={Profile} alt="Logo" />
-            <Box display={'flex'} alignItems={'center'}>
-              <Box>
-                <Text
+            <Flex>
+              <Flex>
+                <Typography
                   fontSize="md"
                   color={colors.white}
                   marginLeft={2}
                   marginRight={2}
                 >
                   {'procstudio'}
-                </Text>
-              </Box>
+                </Typography>
+              </Flex>
               <MdKeyboardArrowDown size={24} className="arrow" />
-            </Box>
+            </Flex>
             {openUserMenu && (
-              <Box className="selectItemsContainer">
+              <Flex className="selectItemsContainer">
                 {userConfig.map((item, index) => {
                   return (
-                    <Box
+                    <Flex
                       key={index}
                       className="selectItem"
                       onClick={() => console.log(item.id)}
                     >
                       {item.description}
-                    </Box>
+                    </Flex>
                   );
                 })}
-              </Box>
+              </Flex>
             )}
           </SelectContainer>
         </Toolbar>
@@ -198,20 +203,24 @@ const Layout = ({ children }: ILayoutProps) => {
           </DrawerHeader>
           {openSidebar && (
             <>
-              <Flex className="imgContainer" pb={35} justifyContent={'center'}>
+              <Flex
+                className="imgContainer"
+                pb={35}
+                display={'flex'}
+                justifyContent={'center'}
+              >
                 <Image src={Logo} alt="Logo" />
               </Flex>
             </>
           )}
 
-          <Box color={colors.white} w={'100%'}>
-            <Stack spacing="8" w={'100%'}>
+          <Flex color={colors.white} sx={{ width: '100%' }}>
+            <Stack spacing="8" sx={{ width: '100%' }}>
               <ActiveLink href="/">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -220,7 +229,9 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdHome size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Página inicial'}</Text>
+                      <Typography fontWeight="regular">
+                        {'Página inicial'}
+                      </Typography>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -229,10 +240,9 @@ const Layout = ({ children }: ILayoutProps) => {
 
               <ActiveLink href="/clients">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/clients'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -241,7 +251,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdGroups size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Clientes'}</Text>
+                      <Typography fontWeight="regular">{'Clientes'}</Typography>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -250,10 +260,9 @@ const Layout = ({ children }: ILayoutProps) => {
 
               <ActiveLink href="/works">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/works'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -262,38 +271,41 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdHandyman size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Trabalhos'}</Text>
+                      <Typography fontWeight="regular">
+                        {'Trabalhos'}
+                      </Typography>
 
                       <MdOutlineArrowRight
                         size={24}
                         className="arrow arrowWork"
                         style={{
                           transform:
-                            asPath === '/new_work' ? 'rotate(90deg)' : 'none',
+                            asPath === '/newWork' ? 'rotate(90deg)' : 'none',
                         }}
                       />
                     </>
                   )}
                 </Flex>
               </ActiveLink>
-              {asPath === '/new_work' && (
+              {asPath === '/newWork' && (
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  justifyContent={'center'}
+                  sx={{
+                    width: '100%',
+                  }}
                   className="subItem"
                 >
                   {openSidebar && (
-                    <Text fontWeight="regular">{'Novo Trabalho'}</Text>
+                    <Typography fontWeight="regular">
+                      {'Novo Trabalho'}
+                    </Typography>
                   )}
                 </Flex>
               )}
               <ActiveLink href="/tasks">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/tasks'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -302,7 +314,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdOutlineFormatListNumbered size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Tarefas'}</Text>
+                      <Typography fontWeight="regular">{'Tarefas'}</Typography>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -311,10 +323,9 @@ const Layout = ({ children }: ILayoutProps) => {
 
               <ActiveLink href="/users">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/users'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -323,7 +334,7 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdPerson size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Usuários'}</Text>
+                      <Typography fontWeight="regular">{'Usuários'}</Typography>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -332,10 +343,9 @@ const Layout = ({ children }: ILayoutProps) => {
 
               <ActiveLink href="/office">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/office'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -344,7 +354,9 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdAccountBalance size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Escritório'}</Text>
+                      <Typography fontWeight="regular">
+                        {'Escritório'}
+                      </Typography>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -353,10 +365,9 @@ const Layout = ({ children }: ILayoutProps) => {
 
               <ActiveLink href="/reports">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/reports'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -365,7 +376,9 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdOutlineListAlt size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Relatórios'}</Text>
+                      <Typography fontWeight="regular">
+                        {'Relatórios'}
+                      </Typography>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
@@ -374,10 +387,9 @@ const Layout = ({ children }: ILayoutProps) => {
 
               <ActiveLink href="/documents">
                 <Flex
-                  w={'100%'}
-                  alignItems={'center'}
-                  style={{
-                    background:
+                  sx={{
+                    width: '100%',
+                    backgroundColor:
                       asPath === '/documents'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
@@ -386,14 +398,16 @@ const Layout = ({ children }: ILayoutProps) => {
                   <MdOutlineDescription size={24} className="icon" />
                   {openSidebar && (
                     <>
-                      <Text fontWeight="regular">{'Documentos'}</Text>
+                      <Typography fontWeight="regular">
+                        {'Documentos'}
+                      </Typography>
                       <MdOutlineArrowRight size={24} className="arrow" />
                     </>
                   )}
                 </Flex>
               </ActiveLink>
             </Stack>
-          </Box>
+          </Flex>
         </Drawer>
       </Container>
 

@@ -18,9 +18,11 @@ export const Container = styled.div`
   padding: 3rem 1rem;
 
   .imageContainer {
-    width: 200px;
+    display: flex;
+
     img {
-      width: 100%;
+      width: 240px;
+      object-fit: contain;
     }
   }
 
@@ -38,15 +40,15 @@ export const Content = styled.div`
   align-items: center;
   flex-direction: column;
 
-  gap: 2rem;
-  padding: 2rem 1rem;
+  gap: 32px;
   width: 100%;
-  max-width: 640px;
+  max-width: 554px;
+  padding-bottom: 32px;
 
   background-color: ${colors.white};
 
-  @media (max-width: 768px) {
-    padding: 1rem;
+  a {
+    text-decoration: none;
   }
 `;
 
@@ -91,16 +93,12 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 640px;
   width: 100%;
+  max-width: 640px;
   padding: 2rem 1rem;
 
   @media (min-width: 640px) {
-    padding: 2rem 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 2rem 4rem;
+    padding: 0 32px;
   }
 `;
 
@@ -112,7 +110,6 @@ export const Button = styled.button<IButtonProps>`
 
   width: 100%;
   height: 42px;
-  margin-top: 8px;
   font-weight: 500;
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
