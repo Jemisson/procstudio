@@ -19,7 +19,14 @@ import {
 
 // First Second Third Fourth Fifth
 
-import { Layout, Footer, StepOne } from '@/components';
+import {
+  Layout,
+  Footer,
+  StepOne,
+  StepTwo,
+  StepThree,
+  StepFour,
+} from '@/components';
 
 const steps = [
   'Procedimento/Assunto',
@@ -73,6 +80,12 @@ const NewWork = () => {
     switch (activeStep) {
       case 0:
         return <StepOne />;
+      case 1:
+        return <StepTwo />;
+      case 2:
+        return <StepThree />;
+      case 3:
+        return <StepFour />;
       default:
         return null;
     }

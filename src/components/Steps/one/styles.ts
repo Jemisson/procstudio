@@ -23,15 +23,11 @@ export const Container = styled.div`
 
   span {
     .MuiInputBase-root {
-      padding: 0 65px 0 0;
+      padding: 2px 65px 0 2px;
     }
 
     .MuiChip-label {
       font-size: 12px !important;
-    }
-
-    .MuiButtonBase-root {
-      height: 24px !important;
     }
 
     .mui-style-1dqzt8q-MuiAutocomplete-root
@@ -40,10 +36,6 @@ export const Container = styled.div`
       padding: 6.5px !important;
     }
   }
-`;
-
-export const Flex = styled.div`
-  display: flex;
 `;
 
 export const InputContainer = styled.div`
@@ -55,6 +47,8 @@ export const InputContainer = styled.div`
 
   .MuiInputBase-root {
     padding: 0;
+    height: 40px !important;
+
   }
 
   input {
@@ -77,6 +71,7 @@ export const SubjectOptionsArea = styled.div`
 export const Input = styled.input`
   width: 314px;
   height: 40px;
+  padding-left: 8px;
   border-radius: 4px;
 
   border: 1px solid ${colors.icons};

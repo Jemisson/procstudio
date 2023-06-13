@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 
-import { colors } from '@/styles/globals';
+import { colors, Flex } from '@/styles/globals';
 import CustomTooltip from '../../Tooltip';
 import { MdOutlineInfo, MdDelete } from 'react-icons/md';
 
@@ -10,7 +10,6 @@ import Notification from '@/components/Notification';
 
 import {
   Container,
-  Flex,
   InputContainer,
   SubjectOptionsArea,
   Input,
@@ -31,6 +30,7 @@ import {
 } from '@mui/material';
 
 const StepOne = () => {
+  const [isVisibleOptionsArea, setIsVisibleOptionsArea] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const [presets, setPresets] = useState([]);
@@ -114,6 +114,10 @@ const StepOne = () => {
 
   const handleCategorySelection = (value: string) => {
     setSelectedSubject(value);
+
+    value.search('min') < 0
+      ? setIsVisibleOptionsArea(true)
+      : setIsVisibleOptionsArea(false);
   };
 
   const renderSubjectContent = () => {
@@ -717,18 +721,20 @@ const StepOne = () => {
             <Typography variant="h6" sx={{ marginBottom: '8px' }}>
               {'Assunto'}
             </Typography>
-            <FormControlLabel
-              control={
-                <Radio
-                  value="administrative"
-                  checked={selectedSubject === 'administrative'}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleCategorySelection(e.target.value)
-                  }
-                />
-              }
-              label="Administrativo"
-            />
+            <Box>
+              <FormControlLabel
+                control={
+                  <Radio
+                    value="administrative"
+                    checked={selectedSubject === 'administrative'}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleCategorySelection(e.target.value)
+                    }
+                  />
+                }
+                label="Administrativo"
+              />
+            </Box>
             <Box>
               <FormControlLabel
                 control={
@@ -841,8 +847,9 @@ const StepOne = () => {
               </Typography>
             </Box>
           </Flex>
-
-          <SubjectOptionsArea>{renderSubjectContent()}</SubjectOptionsArea>
+          {isVisibleOptionsArea ? (
+            <SubjectOptionsArea>{renderSubjectContent()}</SubjectOptionsArea>
+          ) : null}
         </Flex>
       </FormControl>
     </Container>

@@ -54,6 +54,10 @@ export const Title = styled.label`
   color: ${colors.secondary};
 `;
 
+export const Flex = styled.div`
+  display: flex;
+`;
+
 export const DescriptionText = styled.label`
   font-size: 16px;
   font-weight: 300;
