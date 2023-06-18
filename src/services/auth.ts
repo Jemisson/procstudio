@@ -1,4 +1,5 @@
 import { api } from './api';
+import { ISignInRequestData } from '@/interfaces/IAuth';
 
 const signInRequest = async (data: ISignInRequestData) => {
   const { email, password } = data;
@@ -7,9 +8,10 @@ const signInRequest = async (data: ISignInRequestData) => {
     const response = await api.post(
       `/login?email=${email}&password=${password}`,
     );
+
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 

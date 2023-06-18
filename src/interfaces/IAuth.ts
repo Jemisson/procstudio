@@ -18,3 +18,5 @@ interface ISignInRequestData {
   email: string;
   password: string;
 }
+
+export type { IUser, ISignInData, IAuthContextType, ISignInRequestData };

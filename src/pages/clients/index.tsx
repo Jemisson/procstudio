@@ -106,7 +106,7 @@ const Clients = () => {
                   {
                     flex: 1,
                     field: 'email',
-                    headerName: 'Email',
+                    headerName: 'E-mail',
                     align: 'center',
                     headerAlign: 'center',
                     sortable: false,

@@ -17,8 +17,6 @@ import {
   Typography,
 } from '@mui/material';
 
-// First Second Third Fourth Fifth
-
 import {
   Layout,
   Footer,
@@ -26,6 +24,7 @@ import {
   StepTwo,
   StepThree,
   StepFour,
+  StepFive,
 } from '@/components';
 
 const steps = [
@@ -39,6 +38,7 @@ const steps = [
 const NewWork = () => {
   const [activeStep, setActiveStep] = useState(0);
   const pageRef = useRef<HTMLDivElement | null>(null);
+  const [finished, setFinished] = useState(false);
   const [skipped, setSkipped] = useState(new Set<number>());
 
   const isStepSkipped = (step: number): boolean => {
@@ -61,12 +61,17 @@ const NewWork = () => {
 
     setActiveStep(prevActiveStep => prevActiveStep + 1);
     setSkipped(newSkipped);
-
     scrollToTop();
   };
 
   const handleBack = () => {
     setActiveStep(prevActiveStep => prevActiveStep - 1);
+    scrollToTop();
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFinished(true);
     scrollToTop();
   };
 
@@ -86,6 +91,8 @@ const NewWork = () => {
         return <StepThree />;
       case 3:
         return <StepFour />;
+      case 4:
+        return <StepFive />;
       default:
         return null;
     }
@@ -119,19 +126,33 @@ const NewWork = () => {
                 if (isStepSkipped(index)) {
                   stepProps.completed = false;
                 }
+
                 return (
-                  <Step key={label} {...stepProps}>
+                  <Step
+                    key={label}
+                    {...stepProps}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      if (finished) {
+                        return;
+                      }
+                      setActiveStep(index);
+                      scrollToTop();
+                    }}
+                  >
                     <StepLabel
                       {...labelProps}
                       StepIconProps={{
                         style: {
                           color: activeStep > index ? '#26B99A' : '#2A3F54',
+                          cursor: 'pointer',
                         },
                       }}
                     >
                       <DescriptionText
                         style={{
                           color: activeStep > index ? '#26B99A' : '#2A3F54',
+                          cursor: 'pointer',
                         }}
                       >
                         {label}
@@ -215,10 +236,7 @@ const NewWork = () => {
                       borderRadius: '4px',
                     }}
                     color="secondary"
-                    onClick={() => {
-                      console.log('Submit');
-                      activeStep <= 4 ? handleNext() : null;
-                    }}
+                    onClick={(e: any) => handleSubmit(e)}
                   >
                     <Typography color={'white'}>{'Finalizar'}</Typography>
                   </Button>

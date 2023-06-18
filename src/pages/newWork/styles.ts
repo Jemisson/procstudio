@@ -25,7 +25,6 @@ export const Title = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  min-height: 100vh;
   padding: 20px 0;
   max-width: 1600px;
   border-radius: 4px;
@@ -37,7 +36,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
 
-  min-height: 778px;
+  /* min-height: 778px; */
   padding: 0 16px;
 
   .buttonContainer {

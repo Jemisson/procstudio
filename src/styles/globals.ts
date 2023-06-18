@@ -14,6 +14,8 @@ export const theme = createTheme({
     error: {
       main: '#CD0D15',
     },
+
+    mode: 'light',
   },
 });
 

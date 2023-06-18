@@ -10,6 +10,8 @@ import Image from 'next/image';
 import Logo from '../assets/logo-colors@3x.png';
 import { Box, Link, Typography } from '@mui/material';
 
+import Notification from '@/components/Notification';
+
 import { Container, Content, Input, Form, Button } from '@/styles/loginStyles';
 
 const UserSchema = z.object({
@@ -33,9 +35,22 @@ const Home = () => {
   const { signIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
+  const [errorMessage, setErrorMessage] = useState('');
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
+
   async function handleSignIn(data: any) {
     setLoading(true);
-    await signIn(data);
+    try {
+      await signIn(data);
+    } catch (error: any) {
+      setErrorMessage(error.message);
+      setOpenSnackbar(true);
+    }
+
     setLoading(false);
   }
 
@@ -107,6 +122,12 @@ const Home = () => {
           </Box>
         </Form>
       </Content>
+      <Notification
+        open={openSnackbar}
+        message={errorMessage}
+        severity="error"
+        onClose={handleCloseSnackbar}
+      />
     </Container>
   );
 };
