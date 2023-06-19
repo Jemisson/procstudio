@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { DataGrid } from '@mui/x-data-grid';
 import { Box, Modal, Button } from '@mui/material';
-import { IModalProps } from '@/interfaces/IRepresentation';
+import { IModalProps } from '@/interfaces/IModal';
 
 import { colors } from '@/styles/globals';
 import { Content, Title } from './styles';
 import { MdClose } from 'react-icons/md';
 
 const RepresentationModal = ({ isOpen, onClose }: IModalProps) => {
-  const [selectedRows, setSelectedRows] = React.useState([]);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';

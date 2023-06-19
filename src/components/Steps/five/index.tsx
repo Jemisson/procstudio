@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
-import {} from 'react-icons/md';
-import { colors, Flex } from '@/styles/globals';
-import Notification from '@/components/Notification';
+import { Flex } from '@/styles/globals';
 
 import { InputContainer } from './styles';
 
