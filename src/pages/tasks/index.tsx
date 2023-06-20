@@ -13,11 +13,17 @@ import {
 import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
-import { Layout, Footer } from '@/components';
+import { Layout, Footer, NewTaskModal } from '@/components';
 
 const Tasks = () => {
+  const [isOpenModal, setOpenModal] = useState(false);
+
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
 
   useEffect(() => {}, []);
@@ -25,6 +31,7 @@ const Tasks = () => {
   return (
     <>
       <Layout>
+        <NewTaskModal isOpen={isOpenModal} onClose={handleCloseModal} />
         <Container>
           <TitlePage>{'Tarefas'}</TitlePage>
 
@@ -51,7 +58,7 @@ const Tasks = () => {
                     backgroundColor: colors.quartiaryHover,
                   },
                 }}
-                onClick={() => console.log('Adicionar')}
+                onClick={() => setOpenModal(true)}
               >
                 <DescriptionText style={{ cursor: 'pointer' }} className="ml-8">
                   {'Adicionar'}
