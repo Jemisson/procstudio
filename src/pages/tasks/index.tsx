@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
-import { Container, ContentContainer, Input } from './styles';
+import { Container, ContentContainer, Input } from '@/styles/tasksStyles';
 import {
   MdOutlineAddCircle,
   MdVisibility,

@@ -46,9 +46,8 @@ export const InputContainer = styled.div`
   }
 
   .MuiInputBase-root {
-    padding: 0;
+    padding: 0 0 0 4px;
     height: 40px !important;
-
   }
 
   input {

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
 
-import { colors, Flex } from '@/styles/globals';
 import CustomTooltip from '../../Tooltip';
+import { colors, Flex } from '@/styles/globals';
 import { MdOutlineInfo, MdDelete } from 'react-icons/md';
 
 import { IMoreTaxMatter } from '@/interfaces/ISteps';
@@ -612,7 +612,6 @@ const StepOne = () => {
           >
             <Flex
               style={{
-                flexDirection: 'row',
                 marginBottom: '8px',
                 alignItems: 'center',
               }}

@@ -3,7 +3,11 @@ import { withAuth } from '@/middleware/withAuth';
 import Link from 'next/link';
 
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
-import { Container, ContentContainer, InputContainer } from './styles';
+import {
+  Container,
+  ContentContainer,
+  InputContainer,
+} from '@/styles/worksStyles';
 import {
   MdOutlineMoreHoriz,
   MdOutlineAddCircle,

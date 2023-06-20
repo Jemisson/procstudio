@@ -1,6 +1,8 @@
 import React from 'react';
+import { colors, theme } from '@/styles/globals';
 import { Snackbar } from '@mui/material';
 import MuiAlert from '@mui/material/Alert';
+import { ThemeProvider } from 'styled-components';
 
 interface SnackbarMessageProps {
   open: boolean;
@@ -19,12 +21,35 @@ const SnackbarMessage = ({
   severity,
   onClose,
 }: SnackbarMessageProps) => {
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case 'success':
+        return theme.palette.success.main;
+      case 'error':
+        return theme.palette.error.main;
+      case 'warning':
+        return theme.palette.warning.main;
+      case 'info':
+        return theme.palette.info.main;
+      default:
+        return theme.palette.success.main;
+    }
+  };
+
+  const alertColor = getSeverityColor(severity);
+
   return (
-    <Snackbar open={open} autoHideDuration={5000} onClose={onClose}>
-      <Alert severity={severity} onClose={onClose}>
-        {message}
-      </Alert>
-    </Snackbar>
+    <ThemeProvider theme={theme}>
+      <Snackbar open={open} autoHideDuration={5000} onClose={onClose}>
+        <Alert
+          severity={severity}
+          onClose={onClose}
+          sx={{ backgroundColor: alertColor, color: colors.white }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
+    </ThemeProvider>
   );
 };
 

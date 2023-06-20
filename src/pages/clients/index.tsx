@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
-import { Container, ContentContainer, Input } from './styles';
+import { Container, ContentContainer, Input } from '@/styles/clientsStyles';
 import {
   MdOutlineMoreHoriz,
   MdOutlineAddCircle,
@@ -106,7 +106,7 @@ const Clients = () => {
                   {
                     flex: 1,
                     field: 'email',
-                    headerName: 'Email',
+                    headerName: 'E-mail',
                     align: 'center',
                     headerAlign: 'center',
                     sortable: false,
