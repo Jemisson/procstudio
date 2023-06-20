@@ -6,7 +6,12 @@ import { animateScroll as scroll } from 'react-scroll';
 
 import { MdClose } from 'react-icons/md';
 import { DescriptionText } from '@/styles/globals';
-import { Container, ContentContainer, Title, Content } from './styles';
+import {
+  Container,
+  ContentContainer,
+  Title,
+  Content,
+} from '@/styles/newWorkStyles';
 
 import {
   Box,
@@ -66,8 +71,6 @@ const NewWork = () => {
 
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-
-     
     } catch (error: any) {
       setMessage(error.message);
       setType('error');
