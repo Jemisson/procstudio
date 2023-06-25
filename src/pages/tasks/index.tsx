@@ -31,7 +31,9 @@ const Tasks = () => {
   return (
     <>
       <Layout>
-        <NewTaskModal isOpen={isOpenModal} onClose={handleCloseModal} />
+        {isOpenModal ? (
+          <NewTaskModal isOpen={isOpenModal} onClose={handleCloseModal} />
+        ) : null}
         <Container>
           <TitlePage>{'Tarefas'}</TitlePage>
 

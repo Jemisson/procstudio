@@ -12,7 +12,6 @@ import {
 import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
-import { clientData } from '../../services';
 import { Layout, Footer } from '@/components';
 import { IClientProps } from '@/interfaces/IClients';
 
@@ -22,10 +21,6 @@ const Clients = () => {
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
   };
-
-  useEffect(() => {
-    setClientsList(clientData);
-  }, []);
 
   return (
     <>

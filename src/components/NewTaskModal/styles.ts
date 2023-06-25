@@ -30,6 +30,16 @@ export const Content = styled(Box)`
       padding: 6.5px !important;
     }
   }
+
+  .comment-input {
+    width: 464px;
+    height: 322px !important;
+
+    resize: none;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid ${colors.placeholder};
+  }
 `;
 
 export const Title = styled.div`
