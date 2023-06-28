@@ -12,7 +12,7 @@ export const theme = createTheme({
     },
 
     success: {
-      main: '#26B99A',
+      main: '#2e7d32',
     },
 
     error: {
