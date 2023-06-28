@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 import { Flex } from '@/styles/globals';
 
@@ -20,7 +20,7 @@ const StepFive = () => {
   const [gradesInGeneral, setGradesInGeneral] = useState('');
 
   const handleDocumentsProducedSelection = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
   ) => {
     const { value, checked } = event.target;
 
@@ -34,7 +34,7 @@ const StepFive = () => {
   };
 
   const handleDocumentsPendingSelection = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
   ) => {
     const { value, checked } = event.target;
 
