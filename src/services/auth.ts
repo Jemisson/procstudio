@@ -10,10 +10,7 @@ const signInRequest = async (data: ISignInRequestData) => {
   };
 
   try {
-    const response = await api.post('/login', {
-      auth,
-    });
-
+    const response = await api.post('/login', auth);
     return response.data;
   } catch (error) {
     throw error;
