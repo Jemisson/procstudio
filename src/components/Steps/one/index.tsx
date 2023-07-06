@@ -558,7 +558,7 @@ const StepOne = () => {
   return (
     <Container>
       <FormControl sx={{ width: '100%' }}>
-        {/* Clients, Application or Process Number and Pre-Sets */}
+        {/* customers, Application or Process Number and Pre-Sets */}
         <span>
           <Flex style={{ flexDirection: 'column' }}>
             <Typography variant="h6" sx={{ marginBottom: '8px' }}>

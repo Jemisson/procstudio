@@ -1,3 +1,4 @@
+import MoreMenu from './ActionsMenu';
 import ActiveLink from './ActiveLink';
 import Layout from './Layout';
 import Footer from './Footer';
@@ -12,6 +13,7 @@ import StepFour from './Steps/four';
 import StepFive from './Steps/five';
 
 export {
+  MoreMenu,
   ActiveLink,
   Layout,
   Footer,

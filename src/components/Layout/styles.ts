@@ -80,7 +80,7 @@ export const Container = styled.span`
       background-color: #b4b4b4;
     }
 
-    scrollbar-color: #eeeeee #2a3f54;
+    scrollbar-color: #2a3f54;
     scrollbar-width: thin;
   }
 `;
@@ -93,6 +93,7 @@ export const Flex = styled(Box)`
 
 export const SelectContainer = styled.div<IMenuUserProps>`
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-left: auto;
   margin-right: 16px;
@@ -112,25 +113,34 @@ export const SelectContainer = styled.div<IMenuUserProps>`
 
   .selectItemsContainer {
     width: 145px;
-    margin-top: 130px;
+    margin-top: 145px;
     position: absolute;
+
     flex-direction: column;
+    align-items: baseline;
 
     z-index: 1;
-    border-radius: 4px;
     box-shadow: ${border.shadow};
     background-color: ${colors.primary};
 
-    .selectItem {
-      padding: 2px 8px;
-      cursor: pointer;
+    a {
+      width: 100%;
+      padding: 8px;
+
+      text-decoration: none;
       color: ${colors.white};
+
+      :hover {
+        color: ${colors.primary};
+        background-color: ${colors.white};
+      }
     }
   }
 `;
 
 export const CloseDropdown = styled.div`
   display: none;
+  cursor: default;
   position: fixed;
   right: 0;
   bottom: 0;

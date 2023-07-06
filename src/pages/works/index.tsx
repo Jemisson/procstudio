@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 import Link from 'next/link';
 
+import { getAllWorks } from '@/services/works';
+
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
 import {
   Container,
@@ -24,7 +26,14 @@ const Works = () => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getWorks = async () => {
+      const response = await getAllWorks();
+      console.log('Works', response);
+    };
+
+    getWorks();
+  }, []);
 
   return (
     <>

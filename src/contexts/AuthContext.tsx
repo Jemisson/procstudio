@@ -28,7 +28,7 @@ export function AuthProvider({ children }: any) {
 
       api.defaults.headers['Authorization'] = `Bearer ${token}`;
       setUser(user);
-      Router.push('/clients');
+      Router.push('/customers');
     } catch (error: any) {
       throw error;
     }

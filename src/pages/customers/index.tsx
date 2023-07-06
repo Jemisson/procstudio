@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 
+import { getAllCustomers } from '@/services/customers';
+
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
-import { Container, ContentContainer, Input } from '@/styles/clientsStyles';
+import { Container, ContentContainer, Input } from '@/styles/customersStyles';
 import {
   MdOutlineMoreHoriz,
   MdOutlineAddCircle,
@@ -10,17 +12,35 @@ import {
 } from 'react-icons/md';
 
 import { Box, Button } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridRowParams } from '@mui/x-data-grid';
 
-import { Layout, Footer } from '@/components';
-import { IClientProps } from '@/interfaces/IClients';
+import { Layout, Footer, MoreMenu } from '@/components';
+import { ICustomerProps } from '@/interfaces/ICustomer';
 
-const Clients = () => {
-  const [clientsList, setClientsList] = useState<IClientProps[]>([]);
+const Customers = () => {
+  const [customersList, setCustomersList] = useState<ICustomerProps[]>([]);
+  const [customersListFiltered, setCustomersListFiltered] = useState<
+    ICustomerProps[]
+  >([]);
+
 
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
   };
+
+  const handleDetails = (params: GridRowParams) => {
+    console.log('Detalhes', params);
+  };
+
+  useEffect(() => {
+    const getCustomers = async () => {
+      const response = await getAllCustomers();
+      setCustomersList(response.data);
+      setCustomersListFiltered(response.data);
+    };
+
+    getCustomers();
+  }, []);
 
   return (
     <>
@@ -64,15 +84,12 @@ const Clients = () => {
                 disableColumnMenu
                 disableRowSelectionOnClick
                 rows={
-                  clientsList &&
-                  clientsList.map((client: IClientProps, index: number) => ({
-                    id: index,
-                    name: client.name,
-                    type: client.type,
-                    cpf: client.cpf,
-                    email: client.emails[0].email,
-                    city: client.addresses[0].city,
-                    contact: client.phones[0].phone,
+                  customersListFiltered &&
+                  customersListFiltered.map((customer: ICustomerProps) => ({
+                    id: customer.id,
+                    name: customer.attributes.name,
+                    type: customer.type,
+                    cpf: customer.attributes.cpf,
                   }))
                 }
                 columns={[
@@ -131,11 +148,7 @@ const Clients = () => {
                     sortable: false,
                     editable: false,
                     renderCell: (params: any) => (
-                      <MdOutlineMoreHoriz
-                        size={20}
-                        cursor="pointer"
-                        onClick={() => console.log('Actions', params)}
-                      />
+                      <MoreMenu details={() => handleDetails(params.row)} />
                     ),
                   },
                 ]}
@@ -163,4 +176,4 @@ const Clients = () => {
   );
 };
 
-export default withAuth(Clients);
+export default withAuth(Customers);

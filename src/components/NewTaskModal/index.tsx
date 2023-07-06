@@ -38,9 +38,9 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
   const currentDate = dayjs();
 
   const [description, setDescription] = useState('');
-  const [client, setClient] = useState('');
-  const [responsible, setResponsible] = useState('');
-  const [work, setWork] = useState('');
+  const [customerId, setCustomerId] = useState('');
+  const [responsibleId, setResponsibleId] = useState('');
+  const [workId, setWorkId] = useState('');
 
   const [deadlineDate, setDeadlineDate] = useState(currentDate);
   const [highPriority, setHighPriority] = useState('normal');
@@ -57,9 +57,9 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
 
   const resetForm: () => void = () => {
     setDescription('');
-    setClient('');
-    setResponsible('');
-    setWork('');
+    setCustomerId('');
+    setResponsibleId('');
+    setWorkId('');
     setDeadlineDate(currentDate);
     setHighPriority('normal');
     setStatus('pending');
@@ -86,9 +86,9 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
       description,
       deadline: date,
       priority: highPriority,
-      client,
-      responsible,
-      work,
+      customer_id: customerId,
+      profile_admin_id: responsibleId,
+      work_id: workId,
       comment: comments,
       status: status,
     };
@@ -177,12 +177,12 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
                     renderInput={params => (
                       <TextField
                         {...params}
-                        error={!!errors.client && !client}
+                        error={!!errors.client && !customerId}
                         placeholder="Informe o Cliente"
-                        onChange={e => setClient(e.target.value)}
+                        onChange={e => setCustomerId(e.target.value)}
                       />
                     )}
-                    noOptionsText="Nenhuma Cliente Encontrado"
+                    noOptionsText="Nenhum Cliente Encontrado"
                   />
                 </Flex>
 
@@ -201,10 +201,10 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
                       <TextField
                         {...params}
                         placeholder="Selecione um Responsavel"
-                        error={!!errors.responsible && !responsible}
+                        error={!!errors.responsible && !responsibleId}
                       />
                     )}
-                    noOptionsText="Nenhuma Responsavel Encontrado"
+                    noOptionsText="Nenhum Responsavel Encontrado"
                     onChange={() => console.log('Responsavel')}
                   />
                 </Flex>
@@ -226,7 +226,7 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
                         placeholder="Selecione um Trabalho"
                       />
                     )}
-                    noOptionsText="Nenhuma Trabalho Encontrado"
+                    noOptionsText="Nenhum Trabalho Encontrado"
                     onChange={() => console.log('Trabalho')}
                   />
                 </Flex>

@@ -23,6 +23,7 @@ const StudioApp = (props: StudioAppProps) => {
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <title>ProcStudio</title>
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
