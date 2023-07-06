@@ -13,4 +13,13 @@ const createTask = async (data: any) => {
   }
 };
 
-export { createTask };
+const getAllTasks = async () => {
+  try {
+    const response = await api.get('/jobs');
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { createTask, getAllTasks };

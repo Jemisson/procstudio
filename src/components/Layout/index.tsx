@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { ActiveLink } from '@/components';
-import BoxMaterial from '@mui/material/Box';
+import Link from 'next/link';
 
+import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import MuiAppBar from '@mui/material/AppBar';
+import Divider from '@mui/material/Divider';
+
 import { AppBarProps, ILayoutProps } from '@/interfaces/ILayout';
 import { styled, useTheme, Theme, CSSObject } from '@mui/material/styles';
 import {
@@ -118,17 +121,6 @@ const Layout = ({ children }: ILayoutProps) => {
   const [openSidebar, setOpenSidebar] = useState(true);
   const [openUserMenu, setOpenUserMenu] = useState(false);
 
-  const userConfig = [
-    {
-      id: 1,
-      description: 'Detalhes',
-    },
-    {
-      id: 2,
-      description: 'Sair',
-    },
-  ];
-
   const handleDrawerOpen = () => {
     setOpenSidebar(true);
   };
@@ -138,7 +130,7 @@ const Layout = ({ children }: ILayoutProps) => {
   };
 
   return (
-    <BoxMaterial sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={openSidebar}>
         <Toolbar>
@@ -178,17 +170,12 @@ const Layout = ({ children }: ILayoutProps) => {
             </Flex>
             {openUserMenu && (
               <Flex className="selectItemsContainer">
-                {userConfig.map((item, index) => {
-                  return (
-                    <Flex
-                      key={index}
-                      className="selectItem"
-                      onClick={() => console.log(item.id)}
-                    >
-                      {item.description}
-                    </Flex>
-                  );
-                })}
+                <Link href={'/home'}>
+                  <Typography variant="subtitle2"> {'My account'} </Typography>
+                </Link>
+                <Link href={'/'}>
+                  <Typography variant="subtitle2"> {'Logout'} </Typography>
+                </Link>
               </Flex>
             )}
           </SelectContainer>
@@ -216,12 +203,12 @@ const Layout = ({ children }: ILayoutProps) => {
 
           <Flex color={colors.white} sx={{ width: '100%' }}>
             <Stack spacing="8" sx={{ width: '100%' }}>
-              <ActiveLink href="/">
+              <ActiveLink href="/customers">
                 <Flex
                   sx={{
                     width: '100%',
                     backgroundColor:
-                      asPath === '/'
+                      asPath === '/home'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
                   }}
@@ -238,12 +225,12 @@ const Layout = ({ children }: ILayoutProps) => {
                 </Flex>
               </ActiveLink>
 
-              <ActiveLink href="/clients">
+              <ActiveLink href="/customers">
                 <Flex
                   sx={{
                     width: '100%',
                     backgroundColor:
-                      asPath === '/clients'
+                      asPath === '/customers'
                         ? 'rgba(255, 255, 255, 0.2)'
                         : 'transparent',
                   }}
@@ -411,13 +398,13 @@ const Layout = ({ children }: ILayoutProps) => {
         </Drawer>
       </Container>
 
-      <BoxMaterial
+      <Box
         component="main"
         sx={{ flexGrow: 1, width: '100%', overflow: 'hidden' }}
       >
         {children}
-      </BoxMaterial>
-    </BoxMaterial>
+      </Box>
+    </Box>
   );
 };
 

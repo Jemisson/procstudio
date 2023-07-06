@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 
+import { getAllTasks } from '@/services/tasks';
+import { ITaskProps } from '@/interfaces/ITask';
+
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
 import { Container, ContentContainer, Input } from '@/styles/tasksStyles';
 import {
@@ -17,6 +20,8 @@ import { Layout, Footer, NewTaskModal } from '@/components';
 
 const Tasks = () => {
   const [isOpenModal, setOpenModal] = useState(false);
+  const [tasksList, setTasksList] = useState<ITaskProps[]>([]);
+  const [filteredTasksList, setFilteredTasksList] = useState<ITaskProps[]>([]);
 
   const getRowClassName = (params: any) => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
@@ -26,7 +31,16 @@ const Tasks = () => {
     setOpenModal(false);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const getTasks = async () => {
+      const response = await getAllTasks();
+      console.log('Tasks', response.data);
+      setTasksList(response.data);
+      setFilteredTasksList(response.data);
+    };
+
+    getTasks();
+  }, []);
 
   return (
     <>
@@ -72,12 +86,21 @@ const Tasks = () => {
               <DataGrid
                 disableColumnMenu
                 disableRowSelectionOnClick
-                rows={[]}
+                rows={
+                  filteredTasksList.length > 0
+                    ? filteredTasksList.map(task => ({
+                        id: task.id,
+                        description: task.attributes.description,
+                        deadline: task.attributes.deadline,
+                        status: task.attributes.status,
+                      }))
+                    : []
+                }
                 columns={[
                   {
                     flex: 1,
                     field: 'editar',
-                    headerName: 'Nome',
+                    headerName: 'Editar',
                     align: 'center',
                     headerAlign: 'center',
                     sortable: false,
@@ -99,7 +122,7 @@ const Tasks = () => {
                   },
                   {
                     flex: 1,
-                    field: 'client',
+                    field: 'customer',
                     headerName: 'Cliente',
                     align: 'center',
                     headerAlign: 'center',
@@ -115,7 +138,7 @@ const Tasks = () => {
                   },
                   {
                     flex: 1,
-                    field: 'limitDate',
+                    field: 'deadline',
                     headerName: 'Data Limite',
                     align: 'center',
                     headerAlign: 'center',

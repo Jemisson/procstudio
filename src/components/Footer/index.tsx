@@ -41,7 +41,7 @@ const Footer = () => {
             </Typography>
             <MdKeyboardArrowRight size={22} className="arrow" />
           </Box>
-          <Link href={'/clients'} className="links">
+          <Link href={'/customers'} className="links">
             <Typography fontSize="sm">{'Clientes'}</Typography>
           </Link>
           <Link href={'/works'} className="links">

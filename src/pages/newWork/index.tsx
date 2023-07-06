@@ -204,14 +204,24 @@ const NewWork = () => {
                       {...labelProps}
                       StepIconProps={{
                         style: {
-                          color: activeStep > index ? '#26B99A' : '#2A3F54',
+                          color:
+                            activeStep > index
+                              ? '#26B99A'
+                              : activeStep === index
+                              ? '#2A3F54'
+                              : '#A8A8B3',
                           cursor: 'pointer',
                         },
                       }}
                     >
                       <DescriptionText
                         style={{
-                          color: activeStep > index ? '#26B99A' : '#2A3F54',
+                          color:
+                            activeStep > index
+                              ? '#26B99A'
+                              : activeStep === index
+                              ? '#2A3F54'
+                              : '#A8A8B3',
                           cursor: 'pointer',
                         }}
                       >
