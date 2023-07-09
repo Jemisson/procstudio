@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 
 import { getAllTasks } from '@/services/tasks';
-import { ITaskProps } from '@/interfaces/ITask';
+import { ITaskProps, IAttributesProps } from '@/interfaces/ITask';
 
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
 import { Container, ContentContainer, Input } from '@/styles/tasksStyles';
@@ -13,13 +13,17 @@ import {
   MdSearch,
 } from 'react-icons/md';
 
+import { format } from 'date-fns';
 import { Box, Button } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 
-import { Layout, Footer, NewTaskModal } from '@/components';
+import { Layout, Footer, TaskModal, ViewDetailsModal } from '@/components';
 
 const Tasks = () => {
-  const [isOpenModal, setOpenModal] = useState(false);
+  const [isOpenTaskModal, setOpenTaskModal] = useState(false);
+  const [isOpenDetailsModal, setOpenDetailsModal] = useState(false);
+  const [paramsRow, setParamsRow] = useState<IAttributesProps>();
+
   const [tasksList, setTasksList] = useState<ITaskProps[]>([]);
   const [filteredTasksList, setFilteredTasksList] = useState<ITaskProps[]>([]);
 
@@ -28,13 +32,26 @@ const Tasks = () => {
   };
 
   const handleCloseModal = () => {
-    setOpenModal(false);
+    setOpenTaskModal(false);
+    setOpenDetailsModal(false);
+    if (paramsRow) {
+      setParamsRow({} as IAttributesProps);
+    }
+  };
+
+  const handleOpenToEdit = (task: IAttributesProps) => {
+    setParamsRow(task);
+    setOpenTaskModal(true);
+  };
+
+  const handleOpenToViewDetails = (task: IAttributesProps) => {
+    setParamsRow(task);
+    setOpenDetailsModal(true);
   };
 
   useEffect(() => {
     const getTasks = async () => {
       const response = await getAllTasks();
-      console.log('Tasks', response.data);
       setTasksList(response.data);
       setFilteredTasksList(response.data);
     };
@@ -45,8 +62,20 @@ const Tasks = () => {
   return (
     <>
       <Layout>
-        {isOpenModal ? (
-          <NewTaskModal isOpen={isOpenModal} onClose={handleCloseModal} />
+        {isOpenTaskModal ? (
+          <TaskModal
+            isOpen={isOpenTaskModal}
+            onClose={handleCloseModal}
+            dataToEdit={paramsRow}
+          />
+        ) : null}
+
+        {isOpenDetailsModal ? (
+          <ViewDetailsModal
+            isOpen={isOpenDetailsModal}
+            onClose={handleCloseModal}
+            details={paramsRow}
+          />
         ) : null}
         <Container>
           <TitlePage>{'Tarefas'}</TitlePage>
@@ -74,7 +103,7 @@ const Tasks = () => {
                     backgroundColor: colors.quartiaryHover,
                   },
                 }}
-                onClick={() => setOpenModal(true)}
+                onClick={() => setOpenTaskModal(true)}
               >
                 <DescriptionText style={{ cursor: 'pointer' }} className="ml-8">
                   {'Adicionar'}
@@ -91,8 +120,16 @@ const Tasks = () => {
                     ? filteredTasksList.map(task => ({
                         id: task.id,
                         description: task.attributes.description,
-                        deadline: task.attributes.deadline,
-                        status: task.attributes.status,
+                        deadline: format(
+                          new Date(task.attributes.deadline),
+                          'dd MMMM yyyy',
+                        ),
+                        status:
+                          task.attributes.status === 'pending'
+                            ? 'Pendente'
+                            : task.attributes.status === 'late'
+                            ? 'Atrasado'
+                            : 'Finalizado',
                       }))
                     : []
                 }
@@ -109,12 +146,12 @@ const Tasks = () => {
                       <MdModeEdit
                         size={20}
                         cursor="pointer"
-                        onClick={() => console.log('Actions', params)}
+                        onClick={() => handleOpenToEdit(params.row)}
                       />
                     ),
                   },
                   {
-                    flex: 1,
+                    width: 180,
                     field: 'description',
                     headerName: 'Descrição',
                     align: 'center',
@@ -164,7 +201,7 @@ const Tasks = () => {
                       <MdVisibility
                         size={20}
                         cursor="pointer"
-                        onClick={() => console.log('Actions', params)}
+                        onClick={() => handleOpenToViewDetails(params.row)}
                       />
                     ),
                   },

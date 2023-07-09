@@ -1,4 +1,4 @@
-import { type } from "os";
+import { type } from 'os';
 
 interface IAttributesProps {
   comment: string;
@@ -6,6 +6,9 @@ interface IAttributesProps {
   description: string;
   priority: string;
   status: string;
+  customer_id: string;
+  profile_admin_id: string;
+  work_id: string;
 }
 
 interface IRelationshipsProps {
@@ -19,4 +22,4 @@ interface ITaskProps {
   relationships: IRelationshipsProps;
 }
 
-export type { ITaskProps };
+export type { ITaskProps, IAttributesProps };

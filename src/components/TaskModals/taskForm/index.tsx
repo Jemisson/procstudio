@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 
 import {
   Box,
@@ -25,7 +25,7 @@ import { IModalProps } from '@/interfaces/IModal';
 
 import { Content, Title, Input, DeadlineContainer } from './styles';
 import { colors, Flex } from '@/styles/globals';
-import Notification from '../Notification';
+import Notification from '../../Notification';
 import { MdClose } from 'react-icons/md';
 
 const schema = z.object({
@@ -34,7 +34,7 @@ const schema = z.object({
   responsible: z.string().nonempty('Campo obrigatório'),
 });
 
-const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
+const TaskModal = ({ isOpen, onClose, dataToEdit }: IModalProps) => {
   const currentDate = dayjs();
 
   const [description, setDescription] = useState('');
@@ -122,6 +122,34 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
     setLoading(false);
   };
 
+  useEffect(() => {
+    let date = dayjs(dataToEdit?.deadline);
+    let currentStatus = dataToEdit?.status;
+
+    if (date < currentDate) {
+      date = currentDate;
+    }
+
+    if (currentStatus === 'Pendente') {
+      currentStatus = 'pending';
+    } else if (currentStatus === 'Atrasado') {
+      currentStatus = 'late';
+    } else if (currentStatus === 'Finalizada') {
+      currentStatus = 'finished';
+    }
+
+    if (dataToEdit && Object.values(dataToEdit).length > 0) {
+      setDescription(dataToEdit.description);
+      setCustomerId(dataToEdit.customer_id);
+      setResponsibleId(dataToEdit.profile_admin_id);
+      setWorkId(dataToEdit.work_id);
+      setDeadlineDate(date);
+      setHighPriority(dataToEdit.priority);
+      setStatus(currentStatus as string);
+      setComments(dataToEdit.comment);
+    }
+  }, [dataToEdit]);
+
   return (
     <>
       {openSnackbar && (
@@ -156,6 +184,7 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
                     <TextField
                       id="outlined-basic"
                       variant="outlined"
+                      value={description}
                       onChange={e => setDescription(e.target.value)}
                       placeholder="Informe a Descrição da Tarefa"
                       error={!!errors.description && !description}
@@ -177,6 +206,7 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
                     renderInput={params => (
                       <TextField
                         {...params}
+                        value={customerId}
                         error={!!errors.client && !customerId}
                         placeholder="Informe o Cliente"
                         onChange={e => setCustomerId(e.target.value)}
@@ -200,6 +230,7 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
                     renderInput={params => (
                       <TextField
                         {...params}
+                        value={responsibleId}
                         placeholder="Selecione um Responsavel"
                         error={!!errors.responsible && !responsibleId}
                       />
@@ -223,6 +254,7 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
                     renderInput={params => (
                       <TextField
                         {...params}
+                        value={workId}
                         placeholder="Selecione um Trabalho"
                       />
                     )}
@@ -376,4 +408,4 @@ const NewTaskModal = ({ isOpen, onClose }: IModalProps) => {
   );
 };
 
-export default NewTaskModal;
+export default TaskModal;

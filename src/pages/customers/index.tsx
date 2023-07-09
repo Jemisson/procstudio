@@ -6,7 +6,6 @@ import { getAllCustomers } from '@/services/customers';
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
 import { Container, ContentContainer, Input } from '@/styles/customersStyles';
 import {
-  MdOutlineMoreHoriz,
   MdOutlineAddCircle,
   MdSearch,
 } from 'react-icons/md';
