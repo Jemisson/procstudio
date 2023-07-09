@@ -167,7 +167,11 @@ const TaskModal = ({ isOpen, onClose, dataToEdit }: IModalProps) => {
             alignItems={'center'}
             justifyContent={'space-between'}
           >
-            <Title style={{ fontSize: '28px' }}>{'Nova Tarefa'}</Title>
+            {dataToEdit && Object.values(dataToEdit).length > 0 ? (
+              <Title style={{ fontSize: '28px' }}>{'Editar Tarefa'}</Title>
+            ) : (
+              <Title style={{ fontSize: '28px' }}>{'Nova Tarefa'}</Title>
+            )}
             <Box sx={{ cursor: 'pointer' }} onClick={onClose}>
               <MdClose size={26} />
             </Box>
