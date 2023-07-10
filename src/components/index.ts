@@ -3,7 +3,8 @@ import ActiveLink from './ActiveLink';
 import Layout from './Layout';
 import Footer from './Footer';
 import Notification from './Notification';
-import NewTaskModal from './NewTaskModal';
+import TaskModal from './TaskModals/taskForm';
+import ViewDetailsModal from './TaskModals/ViewDetails';
 import ModalFinalizeRegistration from './ModalFinalizeRegistration';
 
 import StepOne from './Steps/one';
@@ -18,7 +19,8 @@ export {
   Layout,
   Footer,
   Notification,
-  NewTaskModal,
+  TaskModal,
+  ViewDetailsModal,
   ModalFinalizeRegistration,
   StepOne,
   StepTwo,
