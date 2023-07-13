@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { withAuth } from '@/middleware/withAuth';
 import Link from 'next/link';
 
 import { getAllWorks } from '@/services/works';
+import { IWorkProps } from '@/interfaces/IWork';
 
 import { colors, TitlePage, DescriptionText } from '@/styles/globals';
 import {
@@ -26,10 +27,19 @@ const Works = () => {
     return params.rowIndex % 2 === 0 ? 'even-row' : 'odd-row';
   };
 
+  const [worksList, setWorksList] = useState<IWorkProps[]>([]);
+  const [filteredWorksList, setFilteredWorksList] = useState<IWorkProps[]>([]);
+
   useEffect(() => {
     const getWorks = async () => {
-      const response = await getAllWorks();
-      console.log('Works', response);
+      try {
+        await getAllWorks().then(response => {
+          setWorksList(response.data);
+          setFilteredWorksList(response.data);
+        });
+      } catch (error) {
+        console.log('Error', error);
+      }
     };
 
     getWorks();
@@ -81,7 +91,16 @@ const Works = () => {
               <DataGrid
                 disableColumnMenu
                 disableRowSelectionOnClick
-                rows={[]}
+                rows={
+                  filteredWorksList.length > 0
+                    ? filteredWorksList.map(work => ({
+                        id: work.id,
+                        client: work.relationships.profile_customers[0],
+                        procedure: work.attributes.procedure,
+                        subject: work.attributes.subject,
+                      }))
+                    : []
+                }
                 columns={[
                   {
                     flex: 1,
@@ -105,7 +124,7 @@ const Works = () => {
                     headerAlign: 'center',
                   },
                   {
-                    flex: 1,
+                    width: 200,
                     field: 'requestProcess',
                     headerName: 'Requerimento/Processo',
                     align: 'center',
