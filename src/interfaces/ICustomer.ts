@@ -49,6 +49,7 @@ interface IPhoneProps {
 }
 
 interface IAttributesProps {
+  id: string;
   name: string;
   customer_type: string;
   status: number;

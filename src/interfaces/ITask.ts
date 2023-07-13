@@ -1,6 +1,5 @@
-import { type } from 'os';
-
 interface IAttributesProps {
+  id: string;
   comment: string;
   deadline: string;
   description: string;

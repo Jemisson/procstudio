@@ -20,7 +20,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 
 import { z } from 'zod';
-import { createTask } from '@/services/tasks';
+import { createTask, getTaskById } from '@/services/tasks';
+import { getAllWorks } from '@/services/works';
 import { IModalProps } from '@/interfaces/IModal';
 
 import { Content, Title, Input, DeadlineContainer } from './styles';
@@ -42,7 +43,9 @@ const TaskModal = ({ isOpen, onClose, dataToEdit }: IModalProps) => {
   const [responsibleId, setResponsibleId] = useState('');
   const [workId, setWorkId] = useState('');
 
-  const [deadlineDate, setDeadlineDate] = useState(currentDate);
+  const [deadlineDate, setDeadlineDate] = useState<dayjs.Dayjs | null>(
+    currentDate,
+  );
   const [highPriority, setHighPriority] = useState('normal');
 
   const [status, setStatus] = useState('pending');
@@ -54,6 +57,8 @@ const TaskModal = ({ isOpen, onClose, dataToEdit }: IModalProps) => {
   const [message, setMessage] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [type, setType] = useState<'success' | 'error'>('success');
+
+  const [workList, setWorkList] = useState<any[]>([]);
 
   const resetForm: () => void = () => {
     setDescription('');
@@ -80,7 +85,7 @@ const TaskModal = ({ isOpen, onClose, dataToEdit }: IModalProps) => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    const date = deadlineDate.format('DD/MM/YYYY');
+    const date = deadlineDate ? deadlineDate.format('DD/MM/YYYY') : null;
 
     const data = {
       description,
@@ -122,33 +127,50 @@ const TaskModal = ({ isOpen, onClose, dataToEdit }: IModalProps) => {
     setLoading(false);
   };
 
+  const handleEdit = async (id: string) => {
+    setLoading(true);
+
+    try {
+      const response = await getTaskById(id);
+      const data = response.data.attributes;
+      const formatData = dayjs(data.deadline, 'YYYY-MM-DD');
+
+      setDescription(data.description);
+      setCustomerId(data.customer_id);
+      setResponsibleId(data.profile_admin_id);
+      setWorkId(`${data.work_id}`);
+      setDeadlineDate(dayjs(formatData, 'DD/MM/YYYY'));
+      setHighPriority(data.priority);
+      setStatus(data.status);
+      setComments(data.comment ? data.comment : '');
+    } catch (error: any) {
+      setMessage(error.message);
+      setType('error');
+      setOpenSnackbar(true);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    let date = dayjs(dataToEdit?.deadline);
-    let currentStatus = dataToEdit?.status;
-
-    if (date < currentDate) {
-      date = currentDate;
-    }
-
-    if (currentStatus === 'Pendente') {
-      currentStatus = 'pending';
-    } else if (currentStatus === 'Atrasado') {
-      currentStatus = 'late';
-    } else if (currentStatus === 'Finalizada') {
-      currentStatus = 'finished';
-    }
-
     if (dataToEdit && Object.values(dataToEdit).length > 0) {
-      setDescription(dataToEdit.description);
-      setCustomerId(dataToEdit.customer_id);
-      setResponsibleId(dataToEdit.profile_admin_id);
-      setWorkId(dataToEdit.work_id);
-      setDeadlineDate(date);
-      setHighPriority(dataToEdit.priority);
-      setStatus(currentStatus as string);
-      setComments(dataToEdit.comment);
+      handleEdit(dataToEdit.id);
     }
   }, [dataToEdit]);
+
+  useEffect(() => {
+    try {
+      getAllWorks().then(response => {
+        const data = response.data;
+        const idsArray = data.map((item: any) => item.id);
+        setWorkList(idsArray);
+      });
+    } catch (error: any) {
+      setMessage(error.message);
+      setType('error');
+      setOpenSnackbar(true);
+    }
+  }, []);
 
   return (
     <>
@@ -254,16 +276,22 @@ const TaskModal = ({ isOpen, onClose, dataToEdit }: IModalProps) => {
                   <Autocomplete
                     disablePortal={true}
                     autoComplete
-                    options={[]}
+                    options={workList}
+                    value={workId ? workId : null}
                     renderInput={params => (
                       <TextField
                         {...params}
-                        value={workId}
                         placeholder="Selecione um Trabalho"
                       />
                     )}
                     noOptionsText="Nenhum Trabalho Encontrado"
-                    onChange={() => console.log('Trabalho')}
+                    onChange={(event, newValue) => {
+                      if (newValue) {
+                        setWorkId(newValue);
+                      } else {
+                        setWorkId('');
+                      }
+                    }}
                   />
                 </Flex>
 

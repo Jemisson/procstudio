@@ -34,85 +34,107 @@ const ViewDetails = ({ isOpen, onClose, details }: any) => {
         </Box>
 
         <Box mt={'16px'}>
+          <Typography variant="h6">{'Descrição'}</Typography>
+
           <BoxContent>
-            <Typography variant="h6">{'Descrição'}</Typography>
+            <Typography variant="subtitle1">{details.description}</Typography>
             {copiedText === details.description && copiedText ? (
               <MdOutlineCheck size={16} color={colors.green} />
             ) : (
-              <MdOutlineContentCopy
-                size={16}
-                cursor={'pointer'}
-                onClick={() => {
-                  if (details.description) {
-                    handleCopyClick(details.description);
-                  }
-                }}
-              />
+              <>
+                {details.description && (
+                  <MdOutlineContentCopy
+                    size={16}
+                    cursor={'pointer'}
+                    onClick={() => {
+                      if (details.description) {
+                        handleCopyClick(details.description);
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </BoxContent>
-          <Typography variant="subtitle1">{details.description}</Typography>
         </Box>
 
         <Box mt={'16px'}>
+          <Typography variant="h6">{'Cliente'}</Typography>
+
           <BoxContent>
-            <Typography variant="h6">{'Cliente'}</Typography>
+            <Typography variant="subtitle1">{details.customer_id}</Typography>
+
             {copiedText === details.customer_id && copiedText ? (
               <MdOutlineCheck size={16} color={colors.green} />
             ) : (
-              <MdOutlineContentCopy
-                size={16}
-                cursor={'pointer'}
-                onClick={() => {
-                  if (details.customer_id) {
-                    handleCopyClick(details.customer_id);
-                  }
-                }}
-              />
+              <>
+                {details.customer_id && (
+                  <MdOutlineContentCopy
+                    size={16}
+                    cursor={'pointer'}
+                    onClick={() => {
+                      if (details.customer_id) {
+                        handleCopyClick(details.customer_id);
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </BoxContent>
-          <Typography variant="subtitle1">{details.customer_id}</Typography>
         </Box>
 
         <Box mt={'16px'}>
+          <Typography variant="h6">{'Responsavel'}</Typography>
+
           <BoxContent>
-            <Typography variant="h6">{'Responsavel'}</Typography>
+            <Typography variant="subtitle1">
+              {details.profile_admin_id}
+            </Typography>
             {copiedText === details.profile_admin_id && copiedText ? (
               <MdOutlineCheck size={16} color={colors.green} />
             ) : (
-              <MdOutlineContentCopy
-                size={16}
-                cursor={'pointer'}
-                onClick={() => {
-                  if (details.profile_admin_id) {
-                    handleCopyClick(details.profile_admin_id);
-                  }
-                }}
-              />
+              <>
+                {details.profile_admin_id && (
+                  <MdOutlineContentCopy
+                    size={16}
+                    cursor={'pointer'}
+                    onClick={() => {
+                      if (details.profile_admin_id) {
+                        handleCopyClick(details.profile_admin_id);
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </BoxContent>
-          <Typography variant="subtitle1">
-            {details.profile_admin_id}
-          </Typography>
         </Box>
 
         <Box mt={'16px'}>
+          <Typography variant="h6">{'Trabalho'}</Typography>
+
           <BoxContent>
-            <Typography variant="h6">{'Trabalho'}</Typography>
+            <Typography variant="subtitle1">{details.work_id}</Typography>
+
             {copiedText === details.work_id && copiedText ? (
               <MdOutlineCheck size={16} color={colors.green} />
             ) : (
-              <MdOutlineContentCopy
-                size={16}
-                cursor={'pointer'}
-                onClick={() => {
-                  if (details.work_id) {
-                    handleCopyClick(details.work_id);
-                  }
-                }}
-              />
+              <>
+                {details.work_id && (
+                  <MdOutlineContentCopy
+                    size={16}
+                    cursor={'pointer'}
+                    onClick={() => {
+                      if (details.work_id) {
+                        handleCopyClick(details.work_id);
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </BoxContent>
-          <Typography variant="subtitle1">{details.work_id}</Typography>
         </Box>
 
         <Box mt={'16px'}>
@@ -142,15 +164,19 @@ const ViewDetails = ({ isOpen, onClose, details }: any) => {
             {copiedText === details.comment && copiedText ? (
               <MdOutlineCheck size={16} color={colors.green} />
             ) : (
-              <MdOutlineContentCopy
-                size={16}
-                cursor={'pointer'}
-                onClick={() => {
-                  if (details.comment) {
-                    handleCopyClick(details.comment);
-                  }
-                }}
-              />
+              <>
+                {details.comment && (
+                  <MdOutlineContentCopy
+                    size={16}
+                    cursor={'pointer'}
+                    onClick={() => {
+                      if (details.comment) {
+                        handleCopyClick(details.comment);
+                      }
+                    }}
+                  />
+                )}
+              </>
             )}
           </BoxContent>
           <Typography variant="subtitle1">{details.comment}</Typography>

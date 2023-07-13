@@ -22,4 +22,13 @@ const getAllTasks = async () => {
   }
 };
 
-export { createTask, getAllTasks };
+const getTaskById = async (id: string) => {
+  try {
+    const response = await api.get(`/jobs/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { createTask, getAllTasks, getTaskById };
